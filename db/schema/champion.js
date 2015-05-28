@@ -16,7 +16,10 @@ var ChampionSchema = new mongoose.Schema({
     magic: Number,
     difficulty: Number
   },
-  spells: { type: String }
+  spells: {
+    name: { type: String, default: 'none' },
+    image: { type: String, default: 'none' },
+  }
 
 });
 
