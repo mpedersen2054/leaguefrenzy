@@ -4,9 +4,12 @@ var Champion = require('../db/schema/champion');
 
 /* GET home page. */
 router.get('/champions', function(req, res) {
-  Champion.find(function(err, champs) {
-    res.render('champions', { champs: champs });
-  })
+  Champion
+    .find()
+    .sort('name')
+    .exec(function(err, champs) {
+      res.render('champions', { champs: champs });
+    })
 });
 
 router.get('/', function(req, res) {

@@ -1,7 +1,28 @@
 
-<h1>Hello champions Page!!</h1>
+<div id="champions">
+  <div class="fluid-container">
 
-{{#each champs}}
-  {{name}} // {{title}}
-  <br>
-{{/each}}
+    {{!-- search area --}}
+    <div class="row champs-search-area">
+      <div class="col-md-8">
+        hello
+      </div>
+      <div class="col-md-4">
+        goodbye
+      </div>
+    </div>
+
+    <div class="row champs-list-area">
+      {{#each champs}}
+        <div class="col-md-2 col-sm-3 col-xs-6">
+          <div class="champ">
+            <a href="/champions/{{_id}}">
+              <img src="{{image.thumbnail}}">
+            </a>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+  </div>
+</div>
