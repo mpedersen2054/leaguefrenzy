@@ -1,9 +1,12 @@
 var router = require('express').Router();
+var Champion = require('../db/schema/champion');
 
 
 /* GET home page. */
 router.get('/champions', function(req, res) {
-  res.send('hello champions page')
+  Champion.find(function(err, champs) {
+    res.render('champions', { champs: champs });
+  })
 });
 
 router.get('/', function(req, res) {
