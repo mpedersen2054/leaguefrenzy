@@ -9,7 +9,16 @@ router.get('/champions', function(req, res) {
     .sort('name')
     .exec(function(err, champs) {
       res.render('champions', { champs: champs });
-    })
+    });
+});
+
+router.get('/champions/:id', function(req, res) {
+  Champion
+    .findOne({ _id: req.params.id })
+    .exec(function(err, champ) {
+      if(err) console.log(err);
+      res.render('champion', { champ: champ });
+    });
 });
 
 router.get('/', function(req, res) {

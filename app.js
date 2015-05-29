@@ -5,6 +5,7 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var request      = require('request');
+var hbs          = require('hbs');
 var hello        = require('./lib/hello');
 var mongoose     = require('mongoose');
 
@@ -21,6 +22,7 @@ var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
