@@ -17,6 +17,7 @@ router.get('/champions/:id', function(req, res) {
     .findOne({ _id: req.params.id })
     .exec(function(err, champ) {
       if(err) console.log(err);
+      console.log(champ)
       res.render('champion', { champ: champ });
     });
 });

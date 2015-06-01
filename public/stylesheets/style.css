@@ -6,10 +6,12 @@ body {
   font-weight: 300;
   letter-spacing: 0.8px;
   color: #333;
+  background-color: #f8f5f0;
   text-transform: uppercase;
 } /* 1em === 16px */
 h1,h2,h3,h4,h5,h6 { font-size: 1em; margin: 0; padding: 0; }
 img { width: 100%; }
+.well { background-color: #fff; }
 .container { width: 56em; margin: 0 auto; }
 .fluid-container { max-width: 56em; margin: 0 auto; }
 #header h1 {
@@ -70,6 +72,53 @@ img { width: 100%; }
 .champ {
   margin-bottom: 1.875em;
 }
+
+/*Champion Page*/
+
+.splash-image {
+  height: 30em;
+  background-position: center;
+  z-index: -1000;
+  /*position: relative;*/
+}
+
+.overlay {
+  height: 30em;
+  background-color: #aaa;
+  z-index: 1000;
+  opacity: 0.7;
+}
+
+/* Champ Spells */
+.champ-spells {
+  margin: 0 1em;
+}
+.spell {
+  width: 20%;
+  float: left;
+  border: 1px solid red;
+}
+
+/* Progress Bars */
+
+.progress {
+  margin-bottom: 0.5em;
+}
+
+.attack {
+  background-color: red;
+}
+.defense {
+  background-color: green;
+}
+.magic {
+  background-color: blue;
+}
+.difficulty {
+  background-color: purple;
+}
+
+/*Media Queries*/
 
 @media (max-width: 32.5em) {
   #champ-filter {

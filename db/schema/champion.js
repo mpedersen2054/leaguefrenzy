@@ -16,10 +16,14 @@ var ChampionSchema = new mongoose.Schema({
     magic: Number,
     difficulty: Number
   },
-  spells: {
-    name: { type: String, default: 'none' },
-    image: { type: String, default: 'none' },
-  }
+  spells: [
+    {
+      name: String,
+      image: String,
+      registrationEnabled: Boolean,
+      checkinEnabled: Boolean
+    }
+]
 
 });
 
