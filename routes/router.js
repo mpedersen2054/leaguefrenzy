@@ -2,7 +2,6 @@ var router = require('express').Router();
 var Champion = require('../db/schema/champion');
 
 
-/* GET home page. */
 router.get('/champions', function(req, res) {
   Champion
     .find()

@@ -1,52 +1,59 @@
 <div id="champion-page">
   <div class="fluid-container">
-    {{> champ_search_area}}
+    {{!-- {{> champ_search_area}} --}}
     <div class="well">
-            
-      <div class="splash-image" style="background: url({{champ.image.splash}}) rgba(0,0,0,0.2) no-repeat center; ">
-        <div class="overlay">
-          <h1>{{champ.name}}</h1>
-          <h4>{{champ.title}}</h4>
-        </div>
+
+      <div class="champ-thumb">
+        <img src="{{champ.image.thumbnail}}">
       </div>
+      <h1 class="champ-name">{{champ.name}}</h1>
+      <h4 class="champ-title">{{champ.title}}</h4>
+
+      <hr>
 
       <div class="row">
-        <div class="col-md-4">
-          
+        <div class="col-md-5">    
           <div class="champ-spells">
             <div class="row">
-              <div class="spell">hi</div>
-              <div class="spell">hi</div>
-              <div class="spell">hi</div>
-              <div class="spell">hi</div>
-              <div class="spell">hi</div>
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/passive/{{champ.spells.0.image}}">
+              </div>
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.1.image}}">
+              </div>
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.2.image}}">
+              </div>
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.3.image}}">
+              </div>
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.4.image}}">
+              </div>
             </div>
           </div>
 
           <div class="champ-stats">
             <div class="progress">
-              <div class="progress-bar attack" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                <span class="sr-only">40% Complete (success)</span>
+              <div class="progress-bar attack" role="progressbar" aria-valuenow="{{champ.info.attack}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.attack}}%">
               </div>
             </div>
             <div class="progress">
-              <div class="progress-bar defense" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                <span class="sr-only">20% Complete</span>
+              <div class="progress-bar defense" role="progressbar" aria-valuenow="{{champ.info.defense}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.defense}}%">
               </div>
             </div>
             <div class="progress">
-              <div class="progress-bar magic" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                <span class="sr-only">60% Complete (warning)</span>
+              <div class="progress-bar magic" role="progressbar" aria-valuenow="{{champ.info.magic}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.magic}}%">
               </div>
             </div>
             <div class="progress">
-              <div class="progress-bar difficulty" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                <span class="sr-only">80% Complete (danger)</span>
+              <div class="progress-bar difficulty" role="progressbar" aria-valuenow="{{champ.info.difficulty}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.difficulty}}%">
               </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

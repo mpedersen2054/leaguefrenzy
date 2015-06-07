@@ -75,34 +75,49 @@ img { width: 100%; }
 
 /*Champion Page*/
 
-.splash-image {
-  height: 30em;
-  background-position: center;
-  z-index: -1000;
-  /*position: relative;*/
+.champ-thumb {
+  width: 8em;
+  height: 8em;
+  float: left;
+  margin-top: 1em;
+  margin-right: 2em;
 }
 
-.overlay {
-  height: 30em;
-  background-color: #aaa;
-  z-index: 1000;
-  opacity: 0.7;
+.champ-name {
+  opacity: 1.0;
+  font-size: 5em;
+  font-weight: 700;
+  color: #000;
+  margin-top: 0.1em;
+}
+
+.champ-title {
+  opacity: 1.0;
+  font-size: 2em;
+  color: #000;
+  font-weight: 300;
 }
 
 /* Champ Spells */
 .champ-spells {
-  margin: 0 1em;
+  margin: 1em 1em;
 }
 .spell {
   width: 20%;
   float: left;
-  border: 1px solid red;
+  padding: 0.25em;
+}
+
+.spell img {
+  border-radius: 3px;
+  border: 2px solid #000;
 }
 
 /* Progress Bars */
 
 .progress {
   margin-bottom: 0.5em;
+  height: 2em;
 }
 
 .attack {
