@@ -76,8 +76,8 @@ img { width: 100%; }
 /*Champion Page*/
 
 .champ-thumb {
-  width: 8em;
-  height: 8em;
+  width: 9em;
+  height: 9em;
   float: left;
   margin-top: 1em;
   margin-right: 2em;
@@ -96,6 +96,7 @@ img { width: 100%; }
   font-size: 2em;
   color: #000;
   font-weight: 300;
+  margin-bottom: 0.2em;
 }
 
 /* Champ Spells */
@@ -131,6 +132,18 @@ img { width: 100%; }
 }
 .difficulty {
   background-color: purple;
+}
+
+/* Champ Tips */
+
+.ally-tips,
+.enemy-tips {
+  /*font-size: 0.8em;*/
+  text-transform: none;
+}
+
+.ally-tips {
+  padding-top: 1em;
 }
 
 /*Media Queries*/
