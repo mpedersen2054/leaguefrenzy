@@ -82,7 +82,15 @@
 
   <div class="fluid-container">
     <div class="well">
-      hello fuckies
+      <h2>bad against</h2>
+      {{#each champ.counter.badAgainst}}
+        {{counterName}}
+      {{/each}}
+
+      <h2>good agaisnt</h2>
+      {{#each champ.counter.goodAgainst}}
+        {{counters}}
+      {{/each}}
     </div>
   </div>
 </div>

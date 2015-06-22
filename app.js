@@ -15,8 +15,13 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() { console.log('~~ connected to mongodb ~~') });
 
-// if Db isn't already populated, populate Db
-hello.populateDb();
+
+var request   = require('request');
+var cheerio   = require('cheerio');
+
+
+hello.populateChamps();
+
 
 var app = express();
 

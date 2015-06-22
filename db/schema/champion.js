@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var ChampionSchema = new mongoose.Schema({
   name: { type: String },
   title: { type: String },
+  slug: { type: String },
   image: {
     thumbnail: { type: String },
     splash: { type: String }
@@ -23,7 +24,41 @@ var ChampionSchema = new mongoose.Schema({
       registrationEnabled: Boolean,
       checkinEnabled: Boolean
     }
-]
+  ],
+  counter: {
+    goodAgainst: [
+      {
+        champName: String,
+        counters: String,
+        position: String,
+        upvotes: String,
+        downvotes: String,
+        comments: [
+          {
+            commenter: String,
+            dateAdded: Date,
+            contents: String
+          }
+        ]
+      }
+    ],
+    badAgainst: [
+      {
+        champName: String,
+        counterName: String,
+        position: String,
+        upvotes: String,
+        downvotes: String,
+        comments: [
+          {
+            commenter: String,
+            dateAdded: Date,
+            contents: String
+          }
+        ]
+      }
+    ]
+  }
 
 });
 
