@@ -67,10 +67,28 @@ img { width: 100%; }
 /*Champions Page*/
 
 .champs-list-area {
+  padding: 0 0.2em;
 }
 
 .champ {
-  margin-bottom: 1.875em;
+  margin-bottom: 0.6em;
+}
+
+.champ img {
+  border-radius: 0.33333em;
+}
+
+.champ a:hover {
+  text-decoration: none;
+}
+
+.champ .name {
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  top: -1.3em;
+  border-radius: 0.33333em;
 }
 
 /*Champion Page*/
@@ -136,14 +154,71 @@ img { width: 100%; }
 
 /* Champ Tips */
 
+.tips {
+  padding: 0.2em 3em;
+}
+
 .ally-tips,
 .enemy-tips {
   /*font-size: 0.8em;*/
   text-transform: none;
+  /*margin-left: 3em;*/
+  font-size: 0.83em;
+}
+
+.ally-tips h5 {
+  background-color: #C6FAC1;
+  padding: 1em 1.5em;
+  border-radius: 0.33333em;
+  color: #000;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  cursor: pointer;
+}
+.enemy-tips h5 {
+  background-color: #FAD1B6;
+  padding: 1em 1.5em;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: #000;
+  cursor: pointer;
 }
 
 .ally-tips {
-  padding-top: 1em;
+  margin-top: 1.25em;
+  border: 1px solid #C6FAC1;
+  border-radius: 0.4em;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.enemy-tips {
+  border: 1px solid #FAD1B6;
+  border-radius: 0.4em;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ally-tips ul,
+.enemy-tips ul {
+  display: none;
+}
+
+.ally-tips ul,
+.enemy-tips ul {
+  padding-left: 0;
+}
+
+.ally-tips ul li,
+.enemy-tips ul li {
+  list-style: none;
+  padding: 0.75em 1.5em;
+  border-bottom: 1px solid #ddd;
+}
+
+.ally-tips ul li:last-child,
+.enemy-tips ul li:last-child {
+  border-bottom: none;
 }
 
 /*Media Queries*/
@@ -165,5 +240,8 @@ img { width: 100%; }
   }
   #header {
     margin-left: 1em;
+  }
+  .tips {
+    padding: 1em;
   }
 }

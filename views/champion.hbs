@@ -17,7 +17,7 @@
       <hr>
 
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <div class="champ-spells">
             <div class="row">
               <div class="spell">
@@ -57,8 +57,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="ally-tips">
+        <div class="col-md-6 tips">
+          <div class="ally-tips toggle-tips">
             <h5>Ally Tips</h5>
             <ul>
               {{#each champ.allyTips}}
@@ -66,7 +66,7 @@
               {{/each}}
             </ul>
           </div>
-          <div class="enemy-tips">
+          <div class="enemy-tips toggle-tips">
             <h5>Enemy Tips</h5>
             <ul>
               {{#each champ.enemyTips}}
@@ -80,17 +80,23 @@
     </div>
   </div>
 
-  <div class="fluid-container">
-    <div class="well">
-      <h2>bad against</h2>
-      {{#each champ.counter.badAgainst}}
-        {{counterName}}
-      {{/each}}
+  <div class="counters">
+    <div class="fluid-container">
+      <div class="well">
+        <div class="bad-against">
+          <h2>bad against</h2>
+          {{#each champ.counter.badAgainst}}
+            <a href="/champions/{{counterName}}">{{counterName}}</a>
+          {{/each}}
+        </div>
 
-      <h2>good agaisnt</h2>
-      {{#each champ.counter.goodAgainst}}
-        {{counters}}
-      {{/each}}
+        <div class="good-against">
+          <h2>good agaisnt</h2>
+          {{#each champ.counter.goodAgainst}}
+            {{counters}}
+          {{/each}}
+        </div>
+      </div>
     </div>
   </div>
 </div>

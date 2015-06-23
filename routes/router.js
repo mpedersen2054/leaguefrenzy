@@ -11,9 +11,9 @@ router.get('/champions', function(req, res) {
     });
 });
 
-router.get('/champions/:id', function(req, res) {
+router.get('/champions/:slug', function(req, res) {
   Champion
-    .findOne({ _id: req.params.id })
+    .findOne({ slug: req.params.slug })
     .exec(function(err, champ) {
       if(err) console.log(err);
       console.log(champ)
