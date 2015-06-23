@@ -1,34 +1,36 @@
 html { position: relative; min-height: 100%; }
 body {
-  margin: 0 0 3.75em;
+  margin: 6em 0;
   font-size: 16px;
-  font-family: 'Roboto Condensed', sans-serif;
   font-weight: 300;
-  letter-spacing: 0.8px;
+  letter-spacing: 1.2px;
   color: #333;
   background-color: #f8f5f0;
   text-transform: uppercase;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 } /* 1em === 16px */
 h1,h2,h3,h4,h5,h6 { font-size: 1em; margin: 0; padding: 0; }
 img { width: 100%; }
-.well { background-color: #fff; }
+.well { background-color: #fff; border: 1px solid #aaa; outline: none; }
 .fa { font-weight: 700; font-size: 1.1em; }
 a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
+a.btn.btn-xs.add-counter { color: #000; }
+.navbar { padding: 0.5em 0; border-bottom: 4px solid #f8f5f0; }
+.navbar-brand { padding: 15px 0; font-size: 1.4em; margin-left: 0.4em; }
+.navbar-inverse { background-color: #333; }
+.navbar-inverse .navbar-brand { color: #fff; }
+/*.navbar-right { margin-right: -2em; }
+.navbar-left { margin-left: -2em; }*/
+.navbar-nav li { margin-right: 1em; }
 .container { width: 56em; margin: 0 auto; }
 .fluid-container { max-width: 56em; margin: 0 auto; }
-#header h1 {
-  font-size: 3em;
-  color: #81b33a;
-  margin: 0.5em 0;
-  font-weight: 700;
-}
 #footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 3.75em;
-  color: #fff;
-  background-color: #81b33a;
+  color: #333;
+  background-color: #f8f5f0;
 }
 
 /*Champion Search Area*/
@@ -40,7 +42,7 @@ a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
 }
 .champ-search-area p {
   font-size: 0.8em;
-  font-weight: 100;
+  font-weight: 300;
 }
 
 #champ-filter {
@@ -91,6 +93,8 @@ a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
   position: relative;
   top: -1.3em;
   border-radius: 0.33333em;
+  font-size: 0.8em;
+  font-weight: 400;
 }
 
 /*Champion Page*/
@@ -99,11 +103,15 @@ a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
   margin-top: 4em;
 }
 
+.champ-meta {
+  padding: 0 4em 2em 1em;
+}
+
 .champ-thumb {
   width: 8em;
   height: 8em;
   float: left;
-  margin-top: 1em;
+  margin-top: 0.6em;
   margin-right: 2em;
   /*margin-bottom: 2em;*/
 }
@@ -168,7 +176,7 @@ a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
 /* Champ Tips */
 
 .tips {
-  padding: 0.2em 2.5em;
+  /*padding: 0.2em 2.5em;*/
 }
 
 .ally-tips,
@@ -234,26 +242,26 @@ a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
 
 /*counters*/
 
-.counters {
-  padding: 3em;
-}
+.counters {}
 
 .counters h2 {
-  font-size: 2.4em;
+  font-size: 1.8em;
+  color: #000;
   margin-bottom: 0.3em;
-  /*padding-left: 0.4em;*/
   font-weight: 600;
+  margin-top: 0.3em;
 }
 
 .counters a { color: #666; text-decoration: none }
 
 .good-against .champ,
 .bad-against .champ {
-  padding: 1em;
+  padding: 0.75em;
   font-size: 1.3em;
-  margin: 0.6em 0;
+  margin: 0.4em 0;
   border-radius: 0.33333em;
   background-color: #fff;
+  border: 1px solid #aaa;
 }
 
 .champ .position {
@@ -266,6 +274,11 @@ a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
 
 .votes i {
   font-weight: 600;
+}
+
+.add-counter {
+  /*color: #f8f5f0;*/
+  color: #000;
 }
 
 
@@ -283,14 +296,18 @@ a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
 }
 
 @media (max-width: 56.25em) {
-  .well {
+  .well,
+  .counters .champ {
     padding: 1.6em;
     margin: 0 1em;
   }
-  #header {
-    margin-left: 1em;
+  .navbar-brand {
+    margin-left: 0.8em;
   }
-  .tips {
-    padding: 1em;
+  .fluid-container { max-width: 56em; margin: 0 1em; }
+  .good-against .champ,
+  .bad-against .champ {
+    padding: 0.25em 0.5em;
+    margin: 0.2em 0;
   }
 }

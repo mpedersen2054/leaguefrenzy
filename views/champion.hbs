@@ -2,22 +2,26 @@
   <div class="fluid-container">
     {{!-- {{> champ_search_area}} --}}
 
-    <div class="champ-thumb">
-      <img src="{{champ.image.thumbnail}}">
-    </div>
-    <h1 class="champ-name">{{champ.name}}</h1>
-    <h4 class="champ-title">{{champ.title}}</h4>
-    <div class="champ-tags">
-      {{#each champ.tags}}
-        <span class="label label-default {{this}}">{{this}}</span>
-      {{/each}}
+    <div class="well">
+      <div class="champ-meta">
+        <div class="champ-thumb">
+          <img src="{{champ.image.thumbnail}}">
+        </div>
+        <h1 class="champ-name">{{champ.name}}</h1>
+        <h4 class="champ-title">{{champ.title}}</h4>
+        <div class="champ-tags">
+          {{#each champ.tags}}
+            <span class="label label-default {{this}}">{{this}}</span>
+          {{/each}}
+        </div>
+      </div>
     </div>
 
     <br>
 
     <div class="row">
       <div class="col-md-6">
-        <div class="champ-spells">
+      {{!--   <div class="champ-spells">
           <div class="row">
             <div class="spell">
               <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/passive/{{champ.spells.0.image}}">
@@ -55,7 +59,8 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
+
       {{!-- <div class="col-md-6 tips">
         <div class="ally-tips toggle-tips">
           <h5>Ally Tips</h5>
@@ -84,11 +89,11 @@
         <div class="bad-against col-md-6">
           <h2>Bad Against</h2>
           <div class="champ">
-            add counter
+            <a href="#" class="btn btn-link btn-xs add-counter">+ Add Counter</a>
           </div>
           {{#each champ.counter.badAgainst}}
             <div class="champ">
-              <a href="/champions/{{counterName}}">{{counterName}} <span class="position {{position}}">{{position}}</span></a>
+              <a href="/champions/{{counterName}}">{{counterName}} {{!-- <span class="position {{position}}">{{position}}</span> --}}</a>
               <div class="votes">
                 <a href="#" class="btn btn-success btn-xs upvote">
                   <i class="fa fa-angle-up"></i>
@@ -111,7 +116,7 @@
           </div>
           {{#each champ.counter.goodAgainst}}
             <div class="champ">
-              <a href="/champions/{{counters}}">{{counters}} <span class="position {{position}}">{{position}}</span></a>
+              <a href="/champions/{{counters}}">{{counters}} {{!-- <span class="position {{position}}">{{position}}</span> --}}</a>
               <div class="votes">
                 <a href="#" class="btn btn-success btn-xs upvote">
                   <i class="fa fa-angle-up"></i>
