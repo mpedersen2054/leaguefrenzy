@@ -5,7 +5,7 @@ var Champion = require('../db/schema/champion');
 router.get('/champions', function(req, res) {
   Champion
     .find()
-    .sort('name')
+    .sort('slug')
     .exec(function(err, champs) {
       res.render('champions', { champs: champs });
     });

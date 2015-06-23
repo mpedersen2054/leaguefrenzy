@@ -17,5 +17,6 @@ events.champTips = function() {
   })
 }
 
-
-events.champTips()
+$(function() {
+  events.champTips();
+})
