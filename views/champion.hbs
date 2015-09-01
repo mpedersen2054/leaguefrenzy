@@ -14,92 +14,116 @@
             <span class="label label-default {{this}}">{{this}}</span>
           {{/each}}
         </div>
+        <div class="battle-data-button">
+          <a class="more-info btn btn-xs btn-link" href="#">
+            More info
+            <i class="fa fa-chevron-down"></i>
+          </a>
+          <a class="less-info btn btn-xs btn-link" href="#">
+            Less info
+            <i class="fa fa-chevron-up"></i>
+          </a>
+        </div>
       </div>
     </div>
 
-    <br>
 
-    <div class="row">
-      <div class="col-md-6">
-      {{!--   <div class="champ-spells">
-          <div class="row">
-            <div class="spell">
-              <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/passive/{{champ.spells.0.image}}">
+    <div class="battle-data well">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="champ-spells">
+            <div class="row">
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/passive/{{champ.spells.0.image}}">
+                <span class="spell-name">
+                  {{champ.spells.0.name}}
+                </span>
+              </div>
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.1.image}}">
+                <span class="spell-name">
+                  {{champ.spells.1.name}}
+                </span>
+              </div>
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.2.image}}">
+                <span class="spell-name">
+                  {{champ.spells.2.name}}
+                </span>
+              </div>
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.3.image}}">
+                <span class="spell-name">
+                  {{champ.spells.3.name}}
+                </span>
+              </div>
+              <div class="spell">
+                <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.4.image}}">
+                <span class="spell-name">
+                  {{champ.spells.4.name}}
+                </span>
+              </div>
             </div>
-            <div class="spell">
-              <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.1.image}}">
+          </div>
+
+          <div class="champ-stats">
+            <div class="progress">
+              <div class="progress-bar attack" role="progressbar" aria-valuenow="{{champ.info.attack}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.attack}}%">
+              </div>
             </div>
-            <div class="spell">
-              <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.2.image}}">
+            <div class="progress">
+              <div class="progress-bar defense" role="progressbar" aria-valuenow="{{champ.info.defense}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.defense}}%">
+              </div>
             </div>
-            <div class="spell">
-              <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.3.image}}">
+            <div class="progress">
+              <div class="progress-bar magic" role="progressbar" aria-valuenow="{{champ.info.magic}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.magic}}%">
+              </div>
             </div>
-            <div class="spell">
-              <img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/spell/{{champ.spells.4.image}}">
+            <div class="progress">
+              <div class="progress-bar difficulty" role="progressbar" aria-valuenow="{{champ.info.difficulty}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.difficulty}}%">
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="champ-stats">
-          <div class="progress">
-            <div class="progress-bar attack" role="progressbar" aria-valuenow="{{champ.info.attack}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.attack}}%">
-            </div>
+        <div class="col-md-6 tips">
+          <div class="ally-tips toggle-tips">
+            <h5>Ally Tips</h5>
+            <ul>
+              {{#each champ.allyTips}}
+                <li>{{this}}</li>
+              {{/each}}
+            </ul>
           </div>
-          <div class="progress">
-            <div class="progress-bar defense" role="progressbar" aria-valuenow="{{champ.info.defense}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.defense}}%">
-            </div>
-          </div>
-          <div class="progress">
-            <div class="progress-bar magic" role="progressbar" aria-valuenow="{{champ.info.magic}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.magic}}%">
-            </div>
-          </div>
-          <div class="progress">
-            <div class="progress-bar difficulty" role="progressbar" aria-valuenow="{{champ.info.difficulty}}" aria-valuemin="0" aria-valuemax="100" style="width: {{champ.info.difficulty}}%">
-            </div>
+          <div class="enemy-tips toggle-tips">
+            <h5>Enemy Tips</h5>
+            <ul>
+              {{#each champ.enemyTips}}
+                <li>{{this}}</li>
+              {{/each}}
+            </ul>
           </div>
         </div>
-      </div> --}}
 
-      {{!-- <div class="col-md-6 tips">
-        <div class="ally-tips toggle-tips">
-          <h5>Ally Tips</h5>
-          <ul>
-            {{#each champ.allyTips}}
-              <li>{{this}}</li>
-            {{/each}}
-          </ul>
-        </div>
-        <div class="enemy-tips toggle-tips">
-          <h5>Enemy Tips</h5>
-          <ul>
-            {{#each champ.enemyTips}}
-              <li>{{this}}</li>
-            {{/each}}
-          </ul>
-        </div>
-      </div> --}}
-
+      </div>
     </div>
   </div>
 
   <div class="counters">
     <div class="fluid-container">
       <div class="row">
-        <div class="bad-against col-md-6">
+        <div class="bad-against col-md-6" data-gorb="bad">
           <h2>Bad Against</h2>
-          <div class="champ">
-            <a href="#" class="btn btn-link btn-xs add-counter">+ Add Counter</a>
-          </div>
           {{#each champ.counter.badAgainst}}
             <div class="champ">
-              <a href="/champions/{{counterName}}">{{counterName}} {{!-- <span class="position {{position}}">{{position}}</span> --}}</a>
+              <a href="/champions/{{counterName}}">{{counterName}}</a>
               <div class="votes">
-                <a href="#" class="btn btn-success btn-xs upvote">
+                <a href="#" class="upvote">
                   <i class="fa fa-angle-up"></i>
                   {{upvotes}}
                 </a>
-                <a href="#" class="btn btn-danger btn-xs downvote">
+                |
+                <a href="#" class="downvote">
                   <i class="fa fa-angle-down"></i>
                   {{downvotes}}
                 </a>
@@ -107,28 +131,53 @@
             </div>
 
           {{/each}}
+
+          <div class="champ more-champs">
+            <a href="#">
+              show more
+              <i class="fa fa-angle-down"></i>
+            </a>
+          </div>
+          <div class="champ less-champs">
+            <a href="#">
+              show less
+              <i class="fa fa-angle-up"></i>
+            </a>
+          </div>
         </div>
 
-        <div class="good-against col-md-6">
+        <div class="good-against col-md-6" data-gorb="good">
           <h2>Good Against</h2>
-          <div class="champ">
-            add counter
-          </div>
           {{#each champ.counter.goodAgainst}}
             <div class="champ">
-              <a href="/champions/{{counters}}">{{counters}} {{!-- <span class="position {{position}}">{{position}}</span> --}}</a>
+              <a href="/champions/{{counters}}">
+                {{counters}}
+              </a>
               <div class="votes">
-                <a href="#" class="btn btn-success btn-xs upvote">
+                <a href="#" class="upvote">
                   <i class="fa fa-angle-up"></i>
                   {{upvotes}}
                 </a>
-                <a href="#" class="btn btn-danger btn-xs downvote">
+                |
+                <a href="#" class="downvote">
                   <i class="fa fa-angle-down"></i>
                   {{downvotes}}
                 </a>
               </div>
             </div>
           {{/each}}
+          <div class="champ more-champs">
+            <a href="#">
+              show more
+              <i class="fa fa-angle-down"></i>
+            </a>
+          </div>
+          <div class="champ less-champs">
+            <a href="#">
+              show less
+              <i class="fa fa-angle-up"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>

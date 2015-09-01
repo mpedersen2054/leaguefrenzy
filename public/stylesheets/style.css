@@ -1,36 +1,53 @@
 html { position: relative; min-height: 100%; }
 body {
-  margin: 6em 0;
+  /*margin: 6em 0;*/
   font-size: 16px;
-  font-weight: 300;
   letter-spacing: 1.2px;
   color: #333;
-  background-color: #f8f5f0;
+  background-image: url(http://www.random-art.org/img/large/90630.jpg);
+  background-color: rgba(0,0,0,0.8);
+  background-size: contain;
   text-transform: uppercase;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 } /* 1em === 16px */
 h1,h2,h3,h4,h5,h6 { font-size: 1em; margin: 0; padding: 0; }
 img { width: 100%; }
-.well { background-color: #fff; border: 1px solid #aaa; outline: none; }
+.well { background-color: #fff; border: 2px solid #444; outline: none; }
 .fa { font-weight: 700; font-size: 1.1em; }
+.btn { text-transform: uppercase; }
+.btn > i { margin-left: 0.5em; position: relative; bottom: 0.1em; }
 a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
 a.btn.btn-xs.add-counter { color: #000; }
-.navbar { padding: 0.5em 0; border-bottom: 4px solid #f8f5f0; }
-.navbar-brand { padding: 15px 0; font-size: 1.4em; margin-left: 0.4em; }
-.navbar-inverse { background-color: #333; }
-.navbar-inverse .navbar-brand { color: #fff; }
+.navbar { border-bottom: 2px solid #444; }
+.navbar-brand { padding: 15px 0; font-size: 1.4em; margin-left: 0.4em; }/
+
 /*.navbar-right { margin-right: -2em; }
 .navbar-left { margin-left: -2em; }*/
 .navbar-nav li { margin-right: 1em; }
 .container { width: 56em; margin: 0 auto; }
 .fluid-container { max-width: 56em; margin: 0 auto; }
+
+.Mage { background-color:     blue; }
+.Assassin { background-color: orange; }
+.Tank { background-color:     green; }
+.Support { background-color:  pink; }
+.Marksman { background-color: red; }
+.Fighter { background-color:  yellow; }
+
 #footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 3.75em;
   color: #333;
-  background-color: #f8f5f0;
+  background-color: #00C49F;
+  color: #fff;
+  border-top: 2px solid #444;
+}
+
+#footer .fluid-container > div {
+  float: right;
+  margin-top: 1em;
 }
 
 /*Champion Search Area*/
@@ -42,12 +59,12 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 .champ-search-area p {
   font-size: 0.8em;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 
 #champ-filter {
   width: 29em;
-  border: 1px solid #CBCBCB;
+  /*border: 1px solid #CBCBCB;*/
   font-size: 15px;
   font-weight: 300;
   border-radius: 2px;
@@ -72,6 +89,10 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 .champs-list-area {
   padding: 0 0.2em;
+}
+
+#champions-page {
+  margin-bottom: 5em;
 }
 
 #champions-page .champ {
@@ -100,7 +121,7 @@ a.btn.btn-xs.add-counter { color: #000; }
 /*Champion Page*/
 
 #champion-page {
-  margin-top: 4em;
+  margin: 1em 0 6em 0;
 }
 
 .champ-meta {
@@ -139,19 +160,33 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 
 .spell {
+  position: relative;
   width: 20%;
   float: left;
   padding: 0.25em;
+  z-index: 3;
 }
 
 .spell img {
   border-radius: 3px;
-  border: 2px solid #000;
+  /*z-index: 2;*/
+}
+
+.spell-name {
+  position: relative;
+  top: -75px;
+  font-size: 0.5em;
+  max-width: 20%;
+  margin: 0;
+  line-height: 0.2;
+  z-index: -1;
 }
 
 /* Progress Bars */
 
 .champ-stats {
+  position: relative;
+  top: -50px;
   margin-bottom: 1.5em;
 }
 
@@ -246,7 +281,8 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 .counters h2 {
   font-size: 1.8em;
-  color: #000;
+  color: #fff;
+  text-shadow: 1.5px 1.5px 1.5px #333;
   margin-bottom: 0.3em;
   font-weight: 600;
   margin-top: 0.3em;
@@ -256,12 +292,12 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 .good-against .champ,
 .bad-against .champ {
-  padding: 0.75em;
-  font-size: 1.3em;
+  padding: .75em;
+  font-size: 1em;
   margin: 0.4em 0;
   border-radius: 0.33333em;
   background-color: #fff;
-  border: 1px solid #aaa;
+  border: 2px solid #444;
 }
 
 .champ .position {
@@ -269,11 +305,22 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 .votes {
+  position: relative;
+  bottom: 0.2em;
   float: right;
+  /*padding-bottom: 1em;*/
 }
 
+.votes .upvote { color: #65E117; }
+.votes .downvote { color: #FF4F49; }
+
 .votes i {
-  font-weight: 600;
+  /*font-weight: 600;*/
+}
+
+.more-champs,
+.less-champs {
+  text-align: center;
 }
 
 .add-counter {
@@ -281,7 +328,32 @@ a.btn.btn-xs.add-counter { color: #000; }
   color: #000;
 }
 
+/*Battle Data*/
 
+.battle-data {
+  display: none;
+}
+
+.battle-data-button {
+  margin-bottom: 0.75em;
+  float: right;
+  position: relative;
+  left: 4em;
+  top: 1em;
+}
+
+.battle-data-button a.btn {
+  color: #333;
+}
+
+.more-info {}
+.less-info {
+  display: none;
+}
+
+.Tank {
+  /*background-color: red;*/
+}
 
 /*Media Queries*/
 
