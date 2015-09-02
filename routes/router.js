@@ -8,7 +8,7 @@ router.get('/champions', function(req, res) {
     .find()
     .sort('slug')
     .exec(function(err, champs) {
-      req.app.locals.counters.push({x: 1, y: 3});
+      req.app.locals.counters.push({x: 1, y: 33});
       console.log(req.session.counters);
       console.log(req.app.locals.counters);
       res.render('champions', { champs: champs });
