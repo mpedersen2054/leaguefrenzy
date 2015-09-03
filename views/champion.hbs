@@ -1,4 +1,4 @@
-<div id="champion-page">
+<div id="champion-page" data-landingchamp="{{champ.name}}">
   <div class="fluid-container">
     {{!-- {{> champ_search_area}} --}}
 
@@ -109,13 +109,13 @@
     </div>
   </div>
 
-  <div class="counters">
-    <div class="fluid-container">
+  <div class="fluid-container">
+    <div class="counters">
       <div class="row">
         <div class="bad-against col-md-6" data-gorb="bad">
           <h2>Bad Against</h2>
           {{#each champ.counter.badAgainst}}
-            <div class="champ">
+            <div class="champ" data-champ="{{counterName}}">
               <a href="/champions/{{counterName}}">{{counterName}}</a>
               <div class="votes">
                 <a href="#" class="upvote">
@@ -149,7 +149,7 @@
         <div class="good-against col-md-6" data-gorb="good">
           <h2>Good Against</h2>
           {{#each champ.counter.goodAgainst}}
-            <div class="champ">
+            <div class="champ" data-champ="{{counters}}">
               <a href="/champions/{{counters}}">
                 {{counters}}
               </a>

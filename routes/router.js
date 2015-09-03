@@ -8,9 +8,7 @@ router.get('/champions', function(req, res) {
     .find()
     .sort('slug')
     .exec(function(err, champs) {
-      req.app.locals.counters.push({x: 1, y: 33});
-      console.log(req.session.counters);
-      console.log(req.app.locals.counters);
+      if (err) console.log(err);
       res.render('champions', { champs: champs });
     });
 });
@@ -20,18 +18,17 @@ router.get('/champions/:slug', function(req, res) {
     .findOne({ slug: req.params.slug })
     .exec(function(err, champ) {
       if(err) console.log(err);
-      console.log(req.app.locals.counters)
       res.render('champion', { champ: champ });
     });
 });
 
-// router.post('/champions/:slug/beats/:slug2', function(req, res, next) {
+// router.post('/champions/:slug/good/:slug2', function(req, res, next) {
   // if (!req.session) { return console.log('no session!') }
   // console.log('whaddup session, ', req.session);
   // res.status(200).send('success!')
 // });
 
-router.post('/counter/:slug/loses/:slug2', function(req, res, next) {
+router.post('/counter/:slug/bad/:slug2', function(req, res, next) {
   var rp = req.params;
   var sess = req.session;
 

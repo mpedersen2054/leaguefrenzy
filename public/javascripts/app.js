@@ -108,7 +108,6 @@ events.showTenCounters = function() {
         showMoreGood.hide();
         showLessGood.show();
       }
-
       return false;
     })
   }
@@ -127,7 +126,6 @@ events.showTenCounters = function() {
         showLessGood.hide();
         showMoreGood.show();
       }
-
       return false;
     })
   }
@@ -138,10 +136,39 @@ events.showTenCounters = function() {
   showLessEvent(showLessGood);
 }
 
+events.clickUpvote = function() {
+  var c = $('.votes .upvote');
+  var lc = $('#champion-page');
+
+  c.on('click', function() {
+    var cname = $(this).closest('.champ').data('champ');
+    var lcname = lc.data('landingchamp');
+    var gorb = $(this).closest('.col-md-6').data('gorb');
+    var url;
+
+    if (gorb === 'bad') {
+      url = '/counter/' + lcname + '/bad/' + cname;
+    }
+    else if (gorb === 'good') {
+      url = '/counter/' + lcname + '/good/' + cname;
+    }
+
+    console.log(url)
+
+    return false;
+  });
+}
+
+events.clickDownvote = function() {
+  console.log('hello there down')
+}
+
 $(function() {
   events.champTips();
   events.showBattleData();
   events.searchChampion();
   events.spellHover();
   events.showTenCounters();
+  events.clickUpvote();
+  events.clickDownvote();
 })
