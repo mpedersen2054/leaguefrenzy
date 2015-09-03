@@ -22,42 +22,16 @@ router.get('/champions/:slug', function(req, res) {
     });
 });
 
-// router.post('/champions/:slug/good/:slug2', function(req, res, next) {
-  // if (!req.session) { return console.log('no session!') }
-  // console.log('whaddup session, ', req.session);
-  // res.status(200).send('success!')
-// });
 
-router.post('/counter/:slug/bad/:slug2', function(req, res, next) {
-  var rp = req.params;
-  var sess = req.session;
+router.post('/counter', function(req, res, next) {
+  var rb = req.body;
 
-  var cc = {c: rp.slug, l: rp.slug2}
-
-  if (sess.counters) {
-    var inReqVotes = _.findIndex(sess.counters, cc);
-    if (inReqVotes === -1) {
-      console.log('not there!')
-      sess.counters.push(cc);
-      res.json('success! ', sess.counters)
-    }
-    else {
-      console.log('its there!!!')
-      res.json('success! ', sess.counters)
-    }
-  }
-
+  console.log(rb);
+  return res.status(200).send(rb);
 });
 
-router.get('/remove-session', function(req, res) {
-  req.session.destroy(function(err) {
-    if (err) console.log(err);
-    res.redirect('/champions');
-  })
-})
-
 router.get('/', function(req, res) {
-  res.json(req.session)
+  res.send('hello index')
 })
 
 module.exports = router;

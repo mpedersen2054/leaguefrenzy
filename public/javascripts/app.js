@@ -1,5 +1,7 @@
 var events = {};
 
+events._currentVotes = [];
+
 events.champTips = function() {
   var tst = $('.toggle-tips');
   var enemyTipsUl = $('.enemy-tips ul');
@@ -137,30 +139,39 @@ events.showTenCounters = function() {
 }
 
 events.clickUpvote = function() {
-  var c = $('.votes .upvote');
   var lc = $('#champion-page');
+  var up = $('.votes .upvote');
 
   c.on('click', function() {
     var cname = $(this).closest('.champ').data('champ');
     var lcname = lc.data('landingchamp');
     var gorb = $(this).closest('.col-md-6').data('gorb');
-    var url;
+    var data = { lc: lcname, gorb: gorb, c: cname };
+    var unid = lcname+gorb+cname;
 
-    if (gorb === 'bad') {
-      url = '/counter/' + lcname + '/bad/' + cname;
+    if (events._currentVotes.indexOf(unid) === -1) {
+      events._currentVotes.push(unid)
+      $.ajax({
+        url: '/counter',
+        method: 'POST',
+        data: data
+      }).done(function(x) {
+        console.log('request send, heres the response: ', x);
+      }).fail(function(jqxhr, ts) {
+        console.log('fail!', ts)
+      });
     }
-    else if (gorb === 'good') {
-      url = '/counter/' + lcname + '/good/' + cname;
+    else {
+      console.log('already in ther!!!!')
     }
 
-    console.log(url)
+    console.log(events._currentVotes)
 
     return false;
   });
 }
 
 events.clickDownvote = function() {
-  console.log('hello there down')
 }
 
 $(function() {
