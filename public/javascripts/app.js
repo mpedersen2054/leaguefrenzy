@@ -142,15 +142,23 @@ events.clickUpvote = function() {
   var lc = $('#champion-page');
   var up = $('.votes .upvote');
 
-  c.on('click', function() {
-    var cname = $(this).closest('.champ').data('champ');
+  up.on('click', function() {
+    var $this = $(this);
+    var cname  = $this.closest('.champ').data('champ');
     var lcname = lc.data('landingchamp');
-    var gorb = $(this).closest('.col-md-6').data('gorb');
-    var data = { lc: lcname, gorb: gorb, c: cname };
-    var unid = lcname+gorb+cname;
+    var gorb   = $this.closest('.col-md-6').data('gorb');
+    var count  = $this.find('span');
+    var data   = { lc: lcname, gorb: gorb, c: cname };
+    var unid   = lcname+gorb+cname;
 
     if (events._currentVotes.indexOf(unid) === -1) {
-      events._currentVotes.push(unid)
+      events._currentVotes.push(unid);
+
+      // string to num, inc num, back to string, insert
+      var countToNum = +count.text();
+      countToNum++;
+      count.text(countToNum.toString());
+
       $.ajax({
         url: '/counter',
         method: 'POST',
