@@ -15,9 +15,6 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() { console.log('~~ connected to mongodb ~~') });
 
-var alreadyLoadedData = !!process.env.MONGOLAB_URI;
-if (!alreadyLoadedData) { hello.populateChamps(); }
-
 var app = express();
 
 app.use(logger('tiny'));
