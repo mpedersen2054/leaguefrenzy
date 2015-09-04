@@ -31,8 +31,8 @@ var ChampionSchema = new mongoose.Schema({
         champName: String,
         counters: String,
         position: String,
-        upvotes: String,
-        downvotes: String,
+        upvotes: Number,
+        downvotes: Number,
         comments: [
           {
             commenter: String,
@@ -47,8 +47,8 @@ var ChampionSchema = new mongoose.Schema({
         champName: String,
         counterName: String,
         position: String,
-        upvotes: String,
-        downvotes: String,
+        upvotes: Number,
+        downvotes: Number,
         comments: [
           {
             commenter: String,

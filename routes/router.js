@@ -25,9 +25,24 @@ router.get('/champions/:slug', function(req, res) {
 
 router.post('/counter', function(req, res, next) {
   var rb = req.body;
+  var cond = { name: rb.lc };
+  var upda;
 
-  console.log(rb);
-  return res.status(200).send(rb);
+  // since counter{ga/ba} different properties, need cond
+  // to get correct cond & upda objects for increment
+  if (rb.gorb === 'bad') {
+    cond['counter.badAgainst.counterName'] = rb.c;
+    upda = { $inc: { 'counter.badAgainst.$.upvotes': 1 } };
+  }
+  else if (rb.gorb === 'good') {
+    cond['counter.goodAgainst.counters'] = rb.c;
+    upda = { $inc: { 'counter.goodAgainst.$.upvotes': 1 } };
+  }
+
+  Champion.update(cond, upda, function(err, champ) {
+    if (err) console.log(err);
+    console.log(champ);
+  })
 });
 
 router.get('/', function(req, res) {
