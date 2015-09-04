@@ -12,7 +12,7 @@ body {
 } /* 1em === 16px */
 h1,h2,h3,h4,h5,h6 { font-size: 1em; margin: 0; padding: 0; }
 img { width: 100%; }
-.well { background-color: #fff; border: 2px solid #444; outline: none; }
+.well { background-color: #DFFFEA; border: 2px solid #444; outline: none; }
 .fa { font-weight: 700; font-size: 1.1em; }
 .btn { text-transform: uppercase; }
 .btn > i { margin-left: 0.5em; position: relative; bottom: 0.1em; }
@@ -26,7 +26,6 @@ a.btn.btn-xs.add-counter { color: #000; }
 .navbar-nav li { margin-right: 1em; }
 .container { width: 56em; margin: 0 auto; }
 .fluid-container { max-width: 56em; margin: 0 auto; }
-
 .Mage { background-color:     blue; }
 .Assassin { background-color: orange; }
 .Tank { background-color:     green; }
@@ -277,12 +276,10 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 /*counters*/
 
-.counters {}
-
 .counters h2 {
   font-size: 1.8em;
-  color: #fff;
-  text-shadow: 1.5px 1.5px 1.5px #333;
+  color: #000;
+  /*text-shadow: 1.5px 1.5px 1.5px #333;*/
   margin-bottom: 0.3em;
   font-weight: 600;
   margin-top: 0.3em;
@@ -296,8 +293,8 @@ a.btn.btn-xs.add-counter { color: #000; }
   font-size: 1em;
   margin: 0.4em 0;
   border-radius: 0.33333em;
-  background-color: #fff;
-  border: 2px solid #444;
+  background-color: #fafafa;
+  border: 2px solid #ccc;
 }
 
 .champ .position {
@@ -309,6 +306,11 @@ a.btn.btn-xs.add-counter { color: #000; }
   bottom: 0.2em;
   float: right;
   /*padding-bottom: 1em;*/
+}
+
+.votes .upvote,
+.votes .downvote {
+  /*padding: 0.2em;*/
 }
 
 .votes .upvote { color: #65E117; }
@@ -370,8 +372,7 @@ a.btn.btn-xs.add-counter { color: #000; }
 @media (max-width: 56.25em) {
   .well,
   .counters .champ {
-    padding: 1.6em;
-    margin: 0 1em;
+    padding: 1em;
   }
   .navbar-brand {
     margin-left: 0.8em;
@@ -379,7 +380,17 @@ a.btn.btn-xs.add-counter { color: #000; }
   .fluid-container { max-width: 56em; margin: 0 1em; }
   .good-against .champ,
   .bad-against .champ {
-    padding: 0.25em 0.5em;
-    margin: 0.2em 0;
+    padding: 0.8em 0.5em;
+    margin: 0.2em 1em;
   }
+  .good-against h2,
+  .bad-against h2 {
+    text-align: center;
+  }
+  .good-against,
+  .bad-against {
+    margin-top: 2em;
+  }
+
+  .counters a { font-size: 0.8em; }
 }
