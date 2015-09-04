@@ -7,7 +7,6 @@ var request    = require('request');
 var hbs        = require('hbs');
 var hello      = require('./lib/hello');
 var mongoose   = require('mongoose');
-var http       = require('http');
 
 
 mongoose.connect('mongodb://localhost/leaguefrenzy');
@@ -18,13 +17,14 @@ db.once('open', function() { console.log('~~ connected to mongodb ~~') });
 hello.populateChamps();
 var app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
-hbs.registerPartials(__dirname + '/views/partials');
 app.use(logger('tiny'));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+hbs.registerPartials(__dirname + '/views/partials');
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ type: 'application/json' }));
 
 app.use(function(req, res, next) {
   req.counters = [];
