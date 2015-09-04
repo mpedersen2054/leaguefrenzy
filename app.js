@@ -8,8 +8,8 @@ var hbs        = require('hbs');
 var hello      = require('./lib/hello');
 var mongoose   = require('mongoose');
 
-
-mongoose.connect('mongodb://localhost/leaguefrenzy');
+var dburl = process.env.MONGOLAB_URI || 'mongodb://localhost/leaguefrenzy';
+mongoose.connect(dburl);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() { console.log('~~ connected to mongodb ~~') });
