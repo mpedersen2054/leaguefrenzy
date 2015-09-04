@@ -1,7 +1,6 @@
 {
-  "name": "httpNode",
-  "version": "0.0.0",
-  "private": true,
+  "name": "leagueFrenzy",
+  "version": "0.0.1",
   "engines": {
     "node": "0.12.7",
     "npm": "2.1.18"
