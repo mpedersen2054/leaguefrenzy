@@ -138,49 +138,51 @@ events.showTenCounters = function() {
   showLessEvent(showLessGood);
 }
 
-events.clickUpvote = function() {
+events.vote = function() {
   var lc = $('#champion-page');
-  var up = $('.votes .upvote');
+  var votes = $('.votes').children();
 
-  up.on('click', function() {
-    var $this = $(this);
-    var cname  = $this.closest('.champ').data('champ');
+  votes.on('click', function() {
+    var $this  = $(this);
     var lcname = lc.data('landingchamp');
+    var cname  = $this.closest('.champ').data('champ');
     var gorb   = $this.closest('.col-md-6').data('gorb');
+    var uord   = $this.attr('class');
     var count  = $this.find('span');
     var data   = { lc: lcname, gorb: gorb, c: cname };
-    var unid   = lcname+gorb+cname;
+    var unid   = lcname+gorb+cname+uord;
 
+    console.log(unid, uord, events._currentVotes)
+
+    // if unique string isnt in events._currentVotes
+    // therefor it hasnt been clicked this page load
     if (events._currentVotes.indexOf(unid) === -1) {
       events._currentVotes.push(unid);
 
-      // string to num, inc num, back to string, insert
       var countToNum = +count.text();
       countToNum++;
       count.text(countToNum.toString());
 
-      $.ajax({
-        url: '/counter',
-        method: 'POST',
-        data: data
-      }).done(function(x) {
-        console.log('request send, heres the response: ', x);
-      }).fail(function(jqxhr, ts) {
-        console.log('fail!', ts)
-      });
+      castVote(uord, data);
     }
-    else {
-      console.log('already in ther!!!!')
-    }
-
-    console.log(events._currentVotes)
-
+    else { console.log('shits already in there!'); }
     return false;
-  });
+  })
+
+  function castVote(uord, data) {
+    $.ajax({
+      url: '/'+uord, // /upvote, /downvote
+      method: 'POST',
+      data: data
+    }).done(function(x) {
+      console.log('request send, heres the response: ', x);
+    }).fail(function(jqxhr, ts) {
+      console.log('fail!', ts)
+    });
+  }
+
 }
 
-events.clickDownvote = function() {
-}
 
 $(function() {
   events.champTips();
@@ -188,6 +190,5 @@ $(function() {
   events.searchChampion();
   events.spellHover();
   events.showTenCounters();
-  events.clickUpvote();
-  events.clickDownvote();
+  events.vote();
 })
