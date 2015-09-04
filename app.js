@@ -9,12 +9,15 @@ var hello      = require('./lib/hello');
 var mongoose   = require('mongoose');
 
 var dburl = process.env.MONGOLAB_URI || 'mongodb://localhost/leaguefrenzy';
+
 mongoose.connect(dburl);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() { console.log('~~ connected to mongodb ~~') });
 
-hello.populateChamps();
+var alreadyLoadedData = !!process.env.MONGOLAB_URI;
+if (!alreadyLoadedData) { hello.populateChamps(); }
+
 var app = express();
 
 app.use(logger('tiny'));
@@ -41,4 +44,4 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
