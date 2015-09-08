@@ -1,12 +1,16 @@
+/*#2C3E50,  #00C49F*/
 html { position: relative; min-height: 100%; }
 body {
   /*margin: 6em 0;*/
   font-size: 16px;
   letter-spacing: 1.2px;
   color: #333;
-  background-image: url(//www.random-art.org/img/large/90630.jpg);
-  background-color: rgba(0,0,0,0.8);
-  /*background-size: cov;*/
+  background: -webkit-linear-gradient(#00C49F, #2C3E50); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#00C49F, #2C3E50); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#00C49F, #2C3E50); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#00C49F, #2C3E50); /* Standard syntax */
+  /*background-color: rgba(0,0,0,0.2);*/
+  /*background-size: contain;*/
   text-transform: uppercase;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 } /* 1em === 16px */
@@ -15,17 +19,18 @@ img { width: 100%; }
 .well { background-color: #DFFFEA; border: 2px solid #444; outline: none; }
 .fa { font-weight: 700; font-size: 1.1em; }
 .btn { text-transform: uppercase; }
+
 .btn > i { margin-left: 0.5em; position: relative; bottom: 0.1em; }
 a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
 a.btn.btn-xs.add-counter { color: #000; }
+
 .navbar { border-bottom: 2px solid #444; }
 .navbar-brand { padding: 15px 0; font-size: 1.4em; margin-left: 0.4em; }/
-
-/*.navbar-right { margin-right: -2em; }
-.navbar-left { margin-left: -2em; }*/
 .navbar-nav li { margin-right: 1em; }
+
 .container { width: 56em; margin: 0 auto; }
 .fluid-container { max-width: 56em; margin: 0 auto; }
+
 .Mage { background-color:     blue; }
 .Assassin { background-color: orange; }
 .Tank { background-color:     green; }
