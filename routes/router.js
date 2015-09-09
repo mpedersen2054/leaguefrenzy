@@ -1,6 +1,6 @@
-var router = require('express').Router();
+var router   = require('express').Router();
 var Champion = require('../db/schema/champion');
-var _ = require('underscore');
+var _        = require('underscore');
 
 
 router.get('/champions', function(req, res) {
@@ -63,6 +63,10 @@ router.post('/downvote', function(req, res) {
     console.log(champ);
   });
 });
+
+router.get('/summoners', function(req, res) {
+  res.render('summoners')
+})
 
 router.get('/', function(req, res) {
   res.send('hello index')

@@ -56,17 +56,21 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 /*Champion Search Area*/
 
-.champ-search-area {}
-.champ-search-area .title {
+.champ-search-area,
+.summoner-search-area {}
+.champ-search-area .title,
+.summoner-search-area .title {
   font-size: 1.6em;
   font-weight: 400;
 }
-.champ-search-area p {
+.champ-search-area p,
+.summoner-search-area p {
   font-size: 0.8em;
   /*font-weight: 300;*/
 }
 
-#champ-filter {
+#champ-filter,
+#summoner-filter {
   width: 29em;
   /*border: 1px solid #CBCBCB;*/
   font-size: 15px;
