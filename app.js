@@ -9,7 +9,6 @@ var hello      = require('./lib/hello');
 var mongoose   = require('mongoose');
 
 var dburl = process.env.MONGOLAB_URI || 'mongodb://localhost/leaguefrenzy';
-
 mongoose.connect(dburl);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

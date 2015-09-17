@@ -3,6 +3,7 @@ summoners._apiKey = 'a85d0753-6824-4725-a76f-23be84110e08';
 summoners._prevSearches = [];
 summoners._searchDone = false;
 summoners._currentSearch;
+summoners._staticChamps = sc || {};
 
 
 summoners.getUri = function(name) {
@@ -54,14 +55,41 @@ summoners.getRankedChamps = function(data) {
     type: 'GET',
     url: url
   }).done(function(res) {
-    data.rankedChamps   = res.champions;
-    data.lastRankedPlay = res.modifyDate;
+    s.rankedChamps   = res.champions;
+    s.lastRankedPlay = res.modifyDate;
 
-    summoners.getRankedStats(data);
+    summoners.formatRankedChamps(s);
+
   }).fail(function(jqxhr, textStatus, error) {
     console.log('error: ', error);
   })
 }
+
+summoners.formatRankedChamps = function(data) {
+  var s          = data;
+  var rc         = s.rankedChamps;
+  var sc         = [];
+  var champsDict = summoners._staticChamps.data;
+
+  for (var k in champsDict) {
+    var cid = +champsDict[k].key;
+    var name = champsDict[k].id;
+    var thumb = champsDict[k].image.full;
+    sc.push({ cid: cid, name: name, thumb: thumb });
+  }
+
+  _.each(rc, function(c, i) {
+    var cid = c.id;
+    var z = _.find(sc, function(x) { return x.cid === cid });
+    c.info = z;
+  });
+
+  delete s.rankedChamps
+  s.rankedChamps = rc;
+
+  summoners.getRankedStats(s);
+}
+
 
 summoners.getRankedStats = function(data) {
   var s = data;
@@ -82,7 +110,7 @@ summoners.getRankedStats = function(data) {
     s.rankedStats.isVeteral    = re.isVeteran;
     s.rankedStats.leaguePoints = re.leaguePoints;
 
-    console.log(s.rankedStats)
+    console.log('donE!', s)
 
   }).fail(function(jqxhr, textStatus, error) {
     console.log('error: ', error);

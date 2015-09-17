@@ -1,6 +1,8 @@
-var router   = require('express').Router();
-var Champion = require('../db/schema/champion');
-var _        = require('underscore');
+var router       = require('express').Router();
+var Champion     = require('../db/schema/champion');
+var staticChamps = require('../static_champs.json');
+var fs           = require('fs');
+var _            = require('underscore');
 
 
 router.get('/champions', function(req, res) {
@@ -66,10 +68,14 @@ router.post('/downvote', function(req, res) {
 
 router.get('/summoners', function(req, res) {
   res.render('summoners')
-})
+});
+
+router.get('/static_champs', function(req, res) {
+  res.send(staticChamps);
+});
 
 router.get('/', function(req, res) {
   res.send('hello index')
-})
+});
 
 module.exports = router;

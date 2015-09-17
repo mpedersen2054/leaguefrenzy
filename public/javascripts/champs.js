@@ -179,5 +179,4 @@ champs.vote = function() {
       console.log('fail!', ts)
     });
   }
-
 }
