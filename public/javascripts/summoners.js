@@ -36,7 +36,7 @@ sumsearch.on('submit', function(e) {
   gatherSummonerData({sum: sumName, url: url}, function(err, data) {
     if (err) { return handleNoSum(err, sumName) }
     if (!err && data) { return handleFoundSum(data) }
-  })
+  });
 });
 
 var handleNoSum = function(err, sn) {
