@@ -390,12 +390,10 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 .meta .general {
-  /*border-bottom: 1px solid #ddd;*/
   padding: 0.75em;
 }
 
 .meta .general img {
-  height: 100%;
   max-width: 100px;
   float: left;
   border-radius: 4px;
@@ -403,8 +401,8 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 .meta .general h2 {
   float: left;
-  font-size: 3em;
-  padding-top: 25px;
+  font-size: 2.2em;
+  padding-top: 60px;
   padding-left: 25px;
 }
 
@@ -438,26 +436,77 @@ a.btn.btn-xs.add-counter { color: #000; }
   padding: 0.75em;
 }
 
+.meta .wl {
+  text-align: right;
+}
+
 .ranked-champs .heading,
 .ranked-champs .champ-list {
   padding: 0.5em 0.75em;
 }
 
 .ranked-champs h2 {
-  font-size: 1.2em;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
 }
 
 .ranked-champs input {
-  float: right;
+  /*float: right;*/
 }
 
-.ranked-champs .champ-list .col-md-10 {
+/*single ranked champ*/
+
+.ranked-champ {
+  margin: 0.4em 0;
+  background-color: #fafafa;
+}
+.ranked-champ img {
+  height: 40px;
+  width: 40px;
+}
+
+.ranked-champ .name {
+  padding-left: 1em;
+  color: #444;
+}
+
+.ranked-champ .name:hover {
+  text-decoration: none;
+  color: #00C49F;
+}
+
+
+.ranked-champ .win-loss {
+  float: right;
+  margin-top: 8px;
+  margin-right: 16px;
+  border-right: 1px solid #ddd;
+  padding-right: 16px;
+  font-weight: 400;
+}
+
+.ranked-champ .more-info {
+  float: right;
+  color: #444;
+  font-size: 0.8em;
+  margin-top: 12px;
+  margin-right: 16px;
+  font-weight: 300;
+}
+.ranked-champ .more-info:hover {
+  text-decoration: none;
+}
+
+.ranked-champ .extra-data {
+  padding: 0.5em 0.75em;
 }
 
 
 /*Media Queries*/
 
+/*small*/
 @media (max-width: 32.5em) {
+  body { font-size: 14px; }
   #champ-filter,
   #summoner-filter {
     max-width: 18em;
@@ -468,6 +517,7 @@ a.btn.btn-xs.add-counter { color: #000; }
   }
 }
 
+/*large*/
 @media (max-width: 56.25em) {
   .well,
   .counters .champ {
