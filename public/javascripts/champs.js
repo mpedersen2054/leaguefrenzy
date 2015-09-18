@@ -21,8 +21,8 @@ champs.champTips = function() {
 }
 
 champs.showBattleData = function() {
-  var moreInfo = $('.more-info');
-  var lessInfo = $('.less-info');
+  var moreInfo = $('.battle-data-button .more-info');
+  var lessInfo = $('.battle-data-button .less-info');
   var battleData = $('.battle-data');
   var showing = false;
 
