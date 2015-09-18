@@ -23,26 +23,29 @@ summoners.getUri = function(name) {
 
 var sumsearch = $('#summoner-form');
 var spinner = $('.spinner'); spinner.hide();
+var input = $('#summoner-filter');
 
 sumsearch.on('submit', function(e) {
   e.preventDefault();
   spinner.show();
-  var sum = $('#summoner-filter').val().trim().replace(' ', '');
-  var url = summoners.getUri(sum).general;
+
+  var sumName = input.val().replace(/\W/g, '');
+  var url = summoners.getUri(sumName).general;
 
   // gSD callback
-  gatherSummonerData({sum: sum, url: url}, function(err, data) {
-    if (err) { return handleNoSum(sum) }
+  gatherSummonerData({sum: sumName, url: url}, function(err, data) {
+    if (err) { return handleNoSum(err, sumName) }
     if (!err && data) { return handleFoundSum(data) }
   })
 });
 
-var handleNoSum = function(sum) {
-  var nsf = $('<div class="no-summoner-found"><span>'+sum+'</span> not found! Try again.</div>');
+var handleNoSum = function(err, sn) {
+  console.log(sn);
+  var sum = $('<span></span>').text(sn);
+  var ncf = $('<div>').addClass('no-summoner-found').text(' not found! Try again.').prepend(sum);
+  $('.search').after(ncf)
   spinner.hide();
-  $('#summoner-filter').val('');
-  $('.search').after(nsf);
-  console.log('this is called when the champ is not found!!!!');
+  input.val('');
 }
 
 var handleFoundSum = function(data) {
