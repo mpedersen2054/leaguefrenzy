@@ -371,7 +371,17 @@ a.btn.btn-xs.add-counter { color: #000; }
 ===== Find Summoners
  */
 
-.spinner-container {
+.spinner {
+  font-size: 2em;
+  position: relative;
+  left: 50%;
+  color: #2F3F4F;
+  display: none;
+}
+
+.no-summoner-found span {
+  color: red;
+  text-decoration: underline;
 }
 
 

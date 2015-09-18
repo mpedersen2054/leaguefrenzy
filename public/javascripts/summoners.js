@@ -21,29 +21,34 @@ summoners.getUri = function(name) {
   return { general: this.general, champs: this.champs, league: this.league, hello: this.hello }
 }
 
-
 var sumsearch = $('#summoner-form');
-var spinner = $('<i class="fa fa-circle-o-notch fa-spin" style="font-size: 2em; position: relative; left: 50%; color: #2F3F4F;"></i>');
-var spinnerCont = $('.summoner-list-area').children('.spinner-container');
+var spinner = $('.spinner'); spinner.hide();
+
 sumsearch.on('submit', function(e) {
   e.preventDefault();
-  spinnerCont.append(spinner);
-
+  spinner.show();
   var sum = $('#summoner-filter').val().trim().replace(' ', '');
   var url = summoners.getUri(sum).general;
+
   // gSD callback
   gatherSummonerData({sum: sum, url: url}, function(err, data) {
-    if (err) { return handleNoSum(err) }
+    if (err) { return handleNoSum(sum) }
     if (!err && data) { return handleFoundSum(data) }
   })
 });
 
-var handleNoSum = function(err) {
-  console.log('this is called when the champ is not found!!!!')
+var handleNoSum = function(sum) {
+  var nsf = $('<div class="no-summoner-found"><span>'+sum+'</span> not found! Try again.</div>');
+  spinner.hide();
+  $('#summoner-filter').val('');
+  $('.search').after(nsf);
+  console.log('this is called when the champ is not found!!!!');
 }
 
 var handleFoundSum = function(data) {
-  console.log('this is called when summ found!!', data)
+  $('.no-summoner-found').remove();
+  spinner.hide();
+  console.log('this is called when summ found!!', data);
 }
 
 
