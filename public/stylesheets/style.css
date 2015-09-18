@@ -366,6 +366,16 @@ a.btn.btn-xs.add-counter { color: #000; }
   /*background-color: red;*/
 }
 
+
+/*
+===== Find Summoners
+ */
+
+.spinner-container {
+}
+
+
+
 /*Media Queries*/
 
 @media (max-width: 32.5em) {
