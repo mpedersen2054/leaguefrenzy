@@ -9,8 +9,6 @@ body {
   background: -o-linear-gradient(#00C49F, #2C3E50); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#00C49F, #2C3E50); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#00C49F, #2C3E50); /* Standard syntax */
-  /*background-color: rgba(0,0,0,0.2);*/
-  /*background-size: contain;*/
   text-transform: uppercase;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 } /* 1em === 16px */
@@ -100,7 +98,8 @@ a.btn.btn-xs.add-counter { color: #000; }
   padding: 0 0.2em;
 }
 
-#champions-page {
+#champions-page,
+#summoners-page {
   margin-bottom: 5em;
 }
 
@@ -391,7 +390,7 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 .meta .general {
-  border-bottom: 1px solid #ddd;
+  /*border-bottom: 1px solid #ddd;*/
   padding: 0.75em;
 }
 
@@ -409,21 +408,50 @@ a.btn.btn-xs.add-counter { color: #000; }
   padding-left: 25px;
 }
 
+#summoners-page .divider {
+  border-bottom: 1px solid #ddd;
+  margin: 0.5em 0.75em;
+}
+
 .meta .ranked-stats {
   clear: both;
   padding: 0.75em;
-  font-size: 0.8em;
   margin-bottom: -1em;
+}
+
+.meta .ranked-stats div,
+.meta .ranked-stats span {
+  font-size: 0.9em;
 }
 
 .meta .special {
   margin-top: 0.75em;
   position: relative;
-  left: 17.5em;
+  left: 15em;
 }
 
 .meta .special span {
   margin-left: 1.5em;
+}
+
+.meta .ranked-champs {
+  padding: 0.75em;
+}
+
+.ranked-champs .heading,
+.ranked-champs .champ-list {
+  padding: 0.5em 0.75em;
+}
+
+.ranked-champs h2 {
+  font-size: 1.2em;
+}
+
+.ranked-champs input {
+  float: right;
+}
+
+.ranked-champs .champ-list .col-md-10 {
 }
 
 
