@@ -5,6 +5,10 @@ summoners._searchDone = false;
 summoners._currentSearch;
 summoners._staticChamps = sc || {};
 
+var sumsearch = $('#summoner-form');
+var spinner = $('.spinner'); spinner.hide();
+var input = $('#summoner-filter');
+
 
 summoners.getUri = function(name) {
   function getEndpoint(region, type, inp) {
@@ -21,23 +25,22 @@ summoners.getUri = function(name) {
   return { general: this.general, champs: this.champs, league: this.league, hello: this.hello }
 }
 
-var sumsearch = $('#summoner-form');
-var spinner = $('.spinner'); spinner.hide();
-var input = $('#summoner-filter');
 
-sumsearch.on('submit', function(e) {
-  e.preventDefault();
-  spinner.show();
+summoners.submitSummoner = function() {
+  sumsearch.on('submit', function(e) {
+    e.preventDefault();
+    spinner.show();
 
-  var sumName = input.val().replace(/\W/g, '');
-  var url = summoners.getUri(sumName).general;
+    var sumName = input.val().replace(/\W/g, '');
+    var url = summoners.getUri(sumName).general;
 
-  // gSD callback
-  gatherSummonerData({sum: sumName, url: url}, function(err, data) {
-    if (err) { return handleNoSum(err, sumName) }
-    if (!err && data) { return handleFoundSum(data) }
+    // gSD callback
+    gatherSummonerData({sum: sumName, url: url}, function(err, data) {
+      if (err) { return handleNoSum(err, sumName) }
+      if (!err && data) { return handleFoundSum(data) }
+    });
   });
-});
+}
 
 var handleNoSum = function(err, sn) {
   console.log(sn);
@@ -55,6 +58,7 @@ var handleFoundSum = function(data) {
 }
 
 
+// get different info and use callback for when all info is collected
 var gatherSummonerData = function(options, callback) {
 
   if (typeof options != 'object') { callback('no options object', null) }

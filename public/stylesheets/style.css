@@ -16,6 +16,7 @@ body {
 } /* 1em === 16px */
 h1,h2,h3,h4,h5,h6 { font-size: 1em; margin: 0; padding: 0; }
 img { width: 100%; }
+.inline { display: inline-block; }
 .well { background-color: #DFFFEA; border: 2px solid #444; outline: none; }
 .fa { font-weight: 700; font-size: 1.1em; }
 .btn { text-transform: uppercase; }
@@ -384,13 +385,54 @@ a.btn.btn-xs.add-counter { color: #000; }
   text-decoration: underline;
 }
 
+/* summoner meta */
+
+.meta {
+}
+
+.meta .general {
+  border-bottom: 1px solid #ddd;
+  padding: 0.75em;
+}
+
+.meta .general img {
+  height: 100%;
+  max-width: 100px;
+  float: left;
+  border-radius: 4px;
+}
+
+.meta .general h2 {
+  float: left;
+  font-size: 3em;
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+.meta .ranked-stats {
+  clear: both;
+  padding: 0.75em;
+  font-size: 0.8em;
+  margin-bottom: -1em;
+}
+
+.meta .special {
+  margin-top: 0.75em;
+  position: relative;
+  left: 15em;
+}
+
+.meta .special span {
+  margin-left: 1em;
+}
 
 
 /*Media Queries*/
 
 @media (max-width: 32.5em) {
-  #champ-filter {
-    width: 18em;
+  #champ-filter,
+  #summoner-filter {
+    max-width: 18em;
   }
   .glass {
     left: 15em;

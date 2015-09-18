@@ -5,4 +5,6 @@ $(function() {
   champs.spellHover();
   champs.showTenCounters();
   champs.vote();
+
+  summoners.submitSummoner();
 });
