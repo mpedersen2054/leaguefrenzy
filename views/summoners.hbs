@@ -1,24 +1,15 @@
 
-{{!--
-  this is original summoners page, before
-  made into js template
- --}}
-
 <div id="summoners-page">
   <div class="fluid-container">
 
     {{> summoner_search_area}}
 
-    {{!-- eventually create the callback that will show this while the
-    callback function is running --}}
-    <div class="spinner-container well">
-      <i class="fa fa-circle-o-notch fa-spin spinner" style="font-size: 2em; position: relative; left: 50%; color: #2F3F4F;"></i>
+    <div class="spinner-container">
+      <i class="fa fa-circle-o-notch fa-spin spinner" style="font-size: 2em; position: relative; left: 50%; color: #777;"></i>
     </div>
 
     <div class="summoner-list-area">
-
       {{!-- js template get appended here --}}
-
     </div>
   </div>
 </div>

@@ -31,7 +31,6 @@ summoners.submitSummoner = function() {
     });
   });
 }
-
 var handleNoSum = function(err, sn) {
   console.log(sn);
   var sum = $('<span></span>').text(sn);
@@ -40,7 +39,6 @@ var handleNoSum = function(err, sn) {
   spinnerCont.hide();
   input.val('');
 }
-
 var handleFoundSum = function(data) {
   $('.no-summoner-found').remove();
   spinnerCont.hide();
@@ -203,14 +201,14 @@ summoners.appendHTML = function(data) {
 
   // ranked-champs
 
-  html+='<div class="ranked-champs">'
-  html+= '<div class="heading row">'
-  html+=  '<div class="col-md-10">'
-  html+=   '<h2>ranked champs</h2>'
-  html+=   '<input type="text" id="ranked-champ-filter" placeholder="Enter champ...">'
-  html+=  '</div>'
-  html+= '</div>'
-  html+= '<div class="champ-list row">'
+  html+='<div class="ranked-champs well">';
+  html+= '<div class="heading row">';
+  html+=  '<div class="col-md-12">';
+  html+=   '<h2>ranked champs</h2>';
+  html+=   '<input type="text" id="ranked-champ-filter" placeholder="Enter champ...">';
+  html+=  '</div>';
+  html+= '</div><hr>';
+  html+= '<div class="champ-list row">';
 
   // each ranked-champ
   for (var champ in rankedCh) {
@@ -218,23 +216,38 @@ summoners.appendHTML = function(data) {
     if (rankedCh[champ].id == 0 || rankedCh[champ].info == undefined) continue;
     var thumb = '//ddragon.leagueoflegends.com/cdn/5.18.1/img/champion/'+rankedCh[champ].info.thumb;
     var name = rankedCh[champ].info.name;
-    var champWins = rankedCh[champ].stats.totalSessionsWon;
-    var champLoses = rankedCh[champ].stats.totalSessionsLost;
+    var stats = rankedCh[champ].stats;
+    var champWins = stats.totalSessionsWon;
+    var champLoses = stats.totalSessionsLost;
 
-    cHtml+=  '<div class="col-md-10" data-rcname="'+name+'">'
-    cHtml+=   '<div class="ranked-champ">'
-    cHtml+=    '<img src="'+thumb+'">'
-    cHtml+=    '<a href="/champions/'+name.toLowerCase()+'" class="name">'+name+'</a>'
-    cHtml+=    '<a href="#" class="more-info">more info <i class="fa fa-angle-down"></i></a>'
-    cHtml+=    '<div class="win-loss">'
-    cHtml+=     '<span class="win">'+champWins+'</span> - '
-    cHtml+=     '<span class="loss">'+champLoses+'</span>'
-    cHtml+=    '</div>'
+    cHtml+=  '<div class="col-md-12" data-rcname="'+name+'">';
+    cHtml+=   '<div class="ranked-champ">';
+    cHtml+=    '<img src="'+thumb+'">';
+    cHtml+=    '<a href="/champions/'+name.toLowerCase()+'" class="name">'+name+'</a>';
+    cHtml+=    '<a href="#" class="more-info">more info <i class="fa fa-angle-down"></i></a>';
+    cHtml+=    '<div class="win-loss">';
+    cHtml+=     '<span class="win">'+champWins+'</span> - ';
+    cHtml+=     '<span class="loss">'+champLoses+'</span>';
+    cHtml+=    '</div>';
     // .extra-data goes here
-    cHtml+=   '</div>'
-    cHtml+=  '</div>'
-
-    html+=cHtml
+    cHtml+=    '<div class="extra-data">';
+    cHtml+=     '<table class="table">';
+    cHtml+=      '<tr><th>total wins</th><td>'+stats.totalSessionsWon+'</td></tr>';
+    cHtml+=      '<tr><th>total loses</th><td>'+stats.totalSessionsLost+'</td></tr>';
+    cHtml+=      '<tr><th>total minion kills</th><td>'+stats.totalMinionKills+'</td></tr>';
+    cHtml+=      '<tr><th>total double kills</th><td>'+stats.totalDoubleKills+'</td></tr>';
+    cHtml+=      '<tr><th>total first blood</th><td>'+stats.totalFirstBlood+'</td></tr>';
+    cHtml+=      '<tr><th>total damage dealt</th><td>'+stats.totalDamageDealt+'</td></tr>';
+    cHtml+=      '<tr><th>total damage taken</th><td>'+stats.totalDamageTaken+'</td></tr>';
+    cHtml+=      '<tr><th>total champ kills</th><td>'+stats.totalChampionKills+'</td></tr>';
+    cHtml+=      '<tr><th>total champ deaths</th><td>'+stats.totalDeathsPerSession+'</td></tr>';
+    cHtml+=      '<tr><th>max kills</th><td>'+stats.maxChampionsKilled+'</td></tr>';
+    cHtml+=      '<tr><th>max deaths</th><td>'+stats.maxNumDeaths+'</td></tr>';
+    cHtml+=     '</table>';
+    cHtml+=    '</div>';
+    cHtml+=   '</div>';
+    cHtml+=  '</div>';
+    html+=cHtml;
   }
 
   html+= '</div>'
@@ -242,12 +255,14 @@ summoners.appendHTML = function(data) {
 
 
   sumListArea.append(html);
+  $('.extra-data').hide();
   $('#summoners-page .fluid-container').append(sumListArea);
   this.searchRankedChamp();
 
 }
 
-
+// needs to be called from summoners.appendHTML()
+// because if not, cant find #r-c-f
 summoners.searchRankedChamp = function() {
   var rcf = $('#ranked-champ-filter');
   var champpa = $('.ranked-champ').parent();
@@ -261,6 +276,18 @@ summoners.searchRankedChamp = function() {
     else {
       champpa.show();
     }
+  });
+
+  this.rankedChampMoreInfo();
+}
+
+summoners.rankedChampMoreInfo = function() {
+  var moreInfo = $('.more-info');
+  moreInfo.bind('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    var extraData = $this.siblings('.extra-data');
+    extraData.slideToggle();
   });
 }
 

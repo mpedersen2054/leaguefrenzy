@@ -1,29 +1,25 @@
 /*#2C3E50,  #00C49F*/
 html { position: relative; min-height: 100%; }
 body {
-  /*margin: 6em 0;*/
   font-size: 16px;
   letter-spacing: 1.2px;
   color: #333;
   background-color: #efefef;
   text-transform: uppercase;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-} /* 1em === 16px */
+}
 h1,h2,h3,h4,h5,h6 { font-size: 1em; margin: 0; padding: 0; }
 img { width: 100%; }
 .inline { display: inline-block; }
 .well { background-color: #fefefe; border-bottom: 1px solid #ddd; outline: none; }
 .fa { font-weight: 700; font-size: 1.1em; }
 .btn { text-transform: uppercase; }
-
 .btn > i { margin-left: 0.5em; position: relative; bottom: 0.1em; }
 a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
 a.btn.btn-xs.add-counter { color: #000; }
-
 .navbar {}
 .navbar-brand { padding: 15px 0; font-size: 1.4em; margin-left: 0.4em; }/
 .navbar-nav li { margin-right: 1em; }
-
 .container { width: 56em; margin: 0 auto; }
 .fluid-container { max-width: 56em; margin: 0 auto; }
 
@@ -33,6 +29,7 @@ a.btn.btn-xs.add-counter { color: #000; }
 .Support { background-color:  pink; }
 .Marksman { background-color: red; }
 .Fighter { background-color:  yellow; }
+.Mage, .Assassin, .Tank, .Support, .Marksman, .Fighter { opacity: 0.5; }
 
 #footer {
   position: absolute;
@@ -50,10 +47,10 @@ a.btn.btn-xs.add-counter { color: #000; }
   margin-top: 1em;
 }
 
-/*Champion Search Area*/
+/*
+===== Champion Search Area
+ */
 
-.champ-search-area,
-.summoner-search-area {}
 .champ-search-area .title,
 .summoner-search-area .title {
   font-size: 1.6em;
@@ -62,13 +59,11 @@ a.btn.btn-xs.add-counter { color: #000; }
 .champ-search-area p,
 .summoner-search-area p {
   font-size: 0.8em;
-  /*font-weight: 300;*/
 }
 
 #champ-filter,
 #summoner-filter {
   width: 29em;
-  /*border: 1px solid #CBCBCB;*/
   font-size: 15px;
   font-weight: 300;
   border-radius: 2px;
@@ -77,9 +72,7 @@ a.btn.btn-xs.add-counter { color: #000; }
   outline: none;
 }
 
-.search {
-  position: relative;
-}
+.search { position: relative; }
 
 .glass {
   position: relative;
@@ -89,7 +82,9 @@ a.btn.btn-xs.add-counter { color: #000; }
   bottom: 2em;
 }
 
-/*Champions Page*/
+/*
+===== All Champs Page
+ */
 
 .champs-list-area {
   padding: 0 0.2em;
@@ -123,7 +118,9 @@ a.btn.btn-xs.add-counter { color: #000; }
   font-weight: 400;
 }
 
-/*Champion Page*/
+/*
+===== Single Champion Page
+ */
 
 #champion-page {
   margin: 1em 0 6em 0;
@@ -245,7 +242,6 @@ a.btn.btn-xs.add-counter { color: #000; }
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-
 .enemy-tips {
   border: 1px solid #FAD1B6;
   border-radius: 0.4em;
@@ -256,10 +252,6 @@ a.btn.btn-xs.add-counter { color: #000; }
 .ally-tips ul,
 .enemy-tips ul {
   display: none;
-}
-
-.ally-tips ul,
-.enemy-tips ul {
   padding-left: 0;
 }
 
@@ -275,7 +267,9 @@ a.btn.btn-xs.add-counter { color: #000; }
   border-bottom: none;
 }
 
-/*counters*/
+/*
+===== Single Champion Counters
+ */
 
 .counters h2 {
   font-size: 1.8em;
@@ -307,13 +301,8 @@ a.btn.btn-xs.add-counter { color: #000; }
   float: right;
 }
 
-.votes .upvote,
-.votes .downvote {}
-
 .votes .upvote { color: #65E117; }
 .votes .downvote { color: #FF4F49; }
-
-.votes i {}
 
 .more-champs,
 .less-champs {
@@ -349,14 +338,14 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 
 /*
-===== Find Summoners
+===== Find Summoner Page
  */
 
 .spinner {
   font-size: 2em;
   position: relative;
   left: 50%;
-  color: #2F3F4F;
+  color: #fff;
   /*display: none;*/
 }
 
@@ -365,7 +354,7 @@ a.btn.btn-xs.add-counter { color: #000; }
   text-decoration: underline;
 }
 
-/* summoner meta */
+/* Summoner Meta */
 
 .meta {}
 
@@ -412,7 +401,7 @@ a.btn.btn-xs.add-counter { color: #000; }
   margin-left: 1.5em;
 }
 
-.meta .ranked-champs {
+.meta, .ranked-champs {
   padding: 2em;
 }
 
@@ -420,12 +409,8 @@ a.btn.btn-xs.add-counter { color: #000; }
   text-align: right;
 }
 
-.ranked-champs .heading {
-}
-
-.ranked-champs .heading,
-.ranked-champs .champ-list {
-  padding: 1em;
+.ranked-champs {
+  min-height: 37.5em;
 }
 
 .ranked-champs h2 {
@@ -445,12 +430,12 @@ a.btn.btn-xs.add-counter { color: #000; }
   outline: none;
 }
 
-/*single ranked champ*/
+/* Indv Ranked Champ */
 
 .ranked-champ {
   margin: 0.4em 0;
   background-color: #fefefe;
-  max-width: 717px;
+  border-bottom: 1px solid #fafafa;
 }
 .ranked-champ img {
   height: 40px;
@@ -490,11 +475,16 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 .ranked-champ .extra-data {
-  padding: 0.5em 0.75em;
+  display: none;
+  background-color: #fcfcfc;
+  font-size: 12px;
+  padding-left: 4em;
 }
 
 
-/*Media Queries*/
+/*
+===== Media Queries
+ */
 
 /*small*/
 @media (max-width: 32.5em) {
@@ -503,9 +493,18 @@ a.btn.btn-xs.add-counter { color: #000; }
   #summoner-filter {
     max-width: 18em;
   }
+
   .glass {
     left: 15em;
     bottom: 2em;
+  }
+
+  .ranked-champ .name {
+    font-size: 10px;
+  }
+
+  #ranked-champ-filter {
+    float: none;
   }
 }
 
