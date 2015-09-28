@@ -70,8 +70,8 @@ router.get('/summoners', function(req, res) {
   res.render('summoners')
 });
 
-router.get('/static_champs', function(req, res) {
-  res.send(staticChamps);
+router.get('/blah', function(req, res) {
+  res.render('blah');
 });
 
 router.get('/', function(req, res) {

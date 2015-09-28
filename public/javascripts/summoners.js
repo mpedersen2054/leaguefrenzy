@@ -12,22 +12,6 @@ var spinnerCont = $('.spinner-container'); spinnerCont.detach();
 var sumListArea = $('.summoner-list-area'); sumListArea.detach();
 
 
-summoners.getUri = function(name) {
-  function getEndpoint(region, type, inp) {
-    if (type === 0) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + inp +'?api_key=' + summoners._apiKey;
-    else if (type === 1) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.3/stats/by-summoner/' + inp + '/ranked/' +'?api_key=' + summoners._apiKey;
-    else if (type === 2) return 'https://' + region + '.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + inp + '/entry/' +'?api_key=' + summoners._apiKey;
-    else if (type === 3) return 'https://' + region + '.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + inp + '/entry/' +'?api_key=' + summoners._apiKey;
-    else console.log('error!');
-  }
-  this.general = getEndpoint( 'na', 0, name );
-  this.champs  = function( id ) { return getEndpoint( 'na', 1, id ) }
-  this.league  = function( id ) { return getEndpoint( 'na', 2, id ) }
-  this.hello   = 'hello there';
-  return { general: this.general, champs: this.champs, league: this.league, hello: this.hello }
-}
-
-
 summoners.submitSummoner = function() {
   sumsearch.on('submit', function(e) {
     e.preventDefault();
@@ -64,6 +48,21 @@ var handleFoundSum = function(data) {
   input.val('');
 }
 
+
+summoners.getUri = function(name) {
+  function getEndpoint(region, type, inp) {
+    if (type === 0) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + inp +'?api_key=' + summoners._apiKey;
+    else if (type === 1) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.3/stats/by-summoner/' + inp + '/ranked/' +'?api_key=' + summoners._apiKey;
+    else if (type === 2) return 'https://' + region + '.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + inp + '/entry/' +'?api_key=' + summoners._apiKey;
+    else if (type === 3) return 'https://' + region + '.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + inp + '/entry/' +'?api_key=' + summoners._apiKey;
+    else console.log('error!');
+  }
+  this.general = getEndpoint( 'na', 0, name );
+  this.champs  = function( id ) { return getEndpoint( 'na', 1, id ) }
+  this.league  = function( id ) { return getEndpoint( 'na', 2, id ) }
+  this.hello   = 'hello there';
+  return { general: this.general, champs: this.champs, league: this.league, hello: this.hello }
+}
 
 // get different info and use callback for when all info is collected
 var gatherSummonerData = function(options, callback) {
@@ -137,9 +136,8 @@ var gatherSummonerData = function(options, callback) {
       c.info = z;
     });
 
-    delete s.rankedChamps
+    delete s.rankedChamps;
     s.rankedChamps = rc;
-
     self.getRankedStats(s);
   }
 
@@ -180,7 +178,6 @@ summoners.appendHTML = function(data) {
   var html = '';
 
   // meta
-
   html+='<div class="meta well">';
   html+= '<div class="general clearfix">';
   html+=  '<img src="//ddragon.leagueoflegends.com/cdn/5.18.1/img/profileicon/'+data.profileIcon+'.png">';
@@ -224,7 +221,7 @@ summoners.appendHTML = function(data) {
     var champWins = rankedCh[champ].stats.totalSessionsWon;
     var champLoses = rankedCh[champ].stats.totalSessionsLost;
 
-    cHtml+=  '<div class="col-md-10">'
+    cHtml+=  '<div class="col-md-10" data-rcname="'+name+'">'
     cHtml+=   '<div class="ranked-champ">'
     cHtml+=    '<img src="'+thumb+'">'
     cHtml+=    '<a href="/champions/'+name.toLowerCase()+'" class="name">'+name+'</a>'
@@ -246,10 +243,26 @@ summoners.appendHTML = function(data) {
 
   sumListArea.append(html);
   $('#summoners-page .fluid-container').append(sumListArea);
-
+  this.searchRankedChamp();
 
 }
 
+
+summoners.searchRankedChamp = function() {
+  var rcf = $('#ranked-champ-filter');
+  var champpa = $('.ranked-champ').parent();
+
+  rcf.on('keyup click input', function() {
+    if (this.value.length > 0) {
+      champpa.hide().filter(function() {
+        return $(this).data('rcname').toLowerCase().lastIndexOf(rcf.val().toLowerCase(), 0) != -1;
+      }).show();
+    }
+    else {
+      champpa.show();
+    }
+  });
+}
 
 
 
