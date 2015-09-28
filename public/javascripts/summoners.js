@@ -91,12 +91,22 @@ var gatherSummonerData = function(options, callback) {
     var s = data;
     var url = summoners.getUri().champs(s.id);
 
+    function sortByName(a, b) {
+      var aName = a.stats.totalSessionsPlayed;
+      var bName = b.stats.totalSessionsPlayed;
+      return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
+    }
+
     $.ajax({
       type: 'GET',
       url: url
     }).done(function(res) {
       s.rankedChamps   = res.champions;
       s.lastRankedPlay = res.modifyDate;
+
+      s.rankedChamps.sort(sortByName);
+      s.rankedChamps.pop();
+      console.log(s.rankedChamps);
 
       self.formatRankedChamps(s);
 
@@ -213,8 +223,6 @@ summoners.appendHTML = function(data) {
     var name = rankedCh[champ].info.name;
     var champWins = rankedCh[champ].stats.totalSessionsWon;
     var champLoses = rankedCh[champ].stats.totalSessionsLost;
-
-    console.log(thumb)
 
     cHtml+=  '<div class="col-md-10">'
     cHtml+=   '<div class="ranked-champ">'
