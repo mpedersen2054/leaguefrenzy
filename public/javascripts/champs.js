@@ -151,7 +151,7 @@ champs.vote = function() {
     var data   = { lc: lcname, gorb: gorb, c: cname };
     var unid   = lcname+gorb+cname+uord;
 
-    console.log(unid, uord, champs._currentVotes)
+    console.log(unid, uord, champs._currentVotes);
 
     // if unique string isnt in champs._currentVotes
     // therefor it hasnt been clicked this page load
@@ -176,7 +176,7 @@ champs.vote = function() {
     }).done(function(x) {
       console.log('request send, heres the response: ', x);
     }).fail(function(jqxhr, ts) {
-      console.log('fail!', ts)
+      console.log('fail!', ts);
     });
   }
 }

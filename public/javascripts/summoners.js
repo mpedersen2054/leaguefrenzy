@@ -6,8 +6,11 @@ summoners._currentSearch;
 summoners._staticChamps = sc || {};
 
 var sumsearch = $('#summoner-form');
-var spinner = $('.spinner'); spinner.hide();
+var spinnerCont = $('.spinner-container'); spinnerCont.detach();
 var input = $('#summoner-filter');
+
+var sumListArea = $('.summoner-list-area');
+sumListArea.detach();
 
 
 summoners.getUri = function(name) {
@@ -18,10 +21,10 @@ summoners.getUri = function(name) {
     else if (type === 3) return 'https://' + region + '.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + inp + '/entry/' +'?api_key=' + summoners._apiKey;
     else console.log('error!');
   }
-  this.general = getEndpoint( 'na', 0, name )
+  this.general = getEndpoint( 'na', 0, name );
   this.champs  = function( id ) { return getEndpoint( 'na', 1, id ) }
   this.league  = function( id ) { return getEndpoint( 'na', 2, id ) }
-  this.hello   = 'hello there'
+  this.hello   = 'hello there';
   return { general: this.general, champs: this.champs, league: this.league, hello: this.hello }
 }
 
@@ -29,7 +32,7 @@ summoners.getUri = function(name) {
 summoners.submitSummoner = function() {
   sumsearch.on('submit', function(e) {
     e.preventDefault();
-    spinner.show();
+    spinnerCont.show();
 
     var sumName = input.val().replace(/\W/g, '');
     var url = summoners.getUri(sumName).general;
@@ -47,14 +50,14 @@ var handleNoSum = function(err, sn) {
   var sum = $('<span></span>').text(sn);
   var ncf = $('<div>').addClass('no-summoner-found').text(' not found! Try again.').prepend(sum);
   $('.search').after(ncf)
-  spinner.hide();
+  spinnerCont.hide();
   input.val('');
 }
 
 var handleFoundSum = function(data) {
   $('.no-summoner-found').remove();
-  spinner.hide();
-  console.log('this is called when summ found!!', data);
+  spinnerCont.hide();
+  summoners.appendHTML(data);
 }
 
 
@@ -152,6 +155,69 @@ var gatherSummonerData = function(options, callback) {
       callback(error, null);
     })
   }
+
+}
+
+summoners.appendHTML = function(data) {
+  console.log('appending html!', data);
+  var rankedSt = data.rankedStats;
+  var rankedCh = data.rankedChamps;
+  // after all done, append html string to sumlistarea
+  var html = '';
+
+  // meta
+
+  html+='<div class="meta well">';
+  html+= '<div class="general clearfix">';
+  html+=  '<img src="//ddragon.leagueoflegends.com/cdn/5.18.1/img/profileicon/588.png">';
+  html+=  '<h2>'+data.name+'</h2>';
+  html+= '</div>';
+  html+= '<div class="ranked-stats row">';
+  html+=  '<div class="col-md-6 col-sm-12 col-xs-12">';
+  html+=   '<div class="league-stats">';
+  html+=    '<div>Silver <span>V</span> | <span>90LP</span></div>';
+  html+=   '</div>'
+  html+=   '<div class="league-name">Viktors dicks</div>'
+  html+=  '</div>'
+  html+=  '<div class="col-md-2 col-sm-12 col-xs-12 special">'
+  html+=   '<span><i class="fa fa-fire"></i></span>'
+  html+=   '<span><i class="fa fa-star"></i></span>'
+  html+=  '</div>'
+  html+=  '<div class="col-md-4 col-sm-12 col-xs-12">'
+  html+=   '<div class="wl"><span>wins</span> 7</div>'
+  html+=   '<div class="wl"><span>loses</span> 4</div>'
+  html+=  '</div>'
+  html+= '</div>' // close .ranked-stats
+  html+='</div>' // close .meta
+
+  // ranked-champs
+
+  html+='<div class="ranked-champs">'
+  html+= '<div class="heading row">'
+  html+=  '<div class="col-md-6">'
+  html+=   '<h2>ranked champs</h2>'
+  html+=   '<input type="text" id="ranked-champ-filter" placeholder="Enter name...">'
+  html+=  '</div>'
+  html+= '</div>'
+  html+= '<div class="champ-list row">'
+  html+=  '<div class="col-md-10">'
+  html+=   '<div class="ranked-champ">'
+  html+=    '<img src="//ddragon.leagueoflegends.com/cdn/5.18.1/img/champion/Aatrox.png">'
+  html+=    '<a href="/champions/aatrox" class="name">Aatrox</a>'
+  html+=    '<a href="#" class="more-info">more info <i class="fa fa-angle-down"></i></a>'
+  html+=    '<div class="win-loss">'
+  html+=     '<span class="win">7</span> -'
+  html+=     '<span class="loss">4</span>'
+  html+=    '</div>'
+  // .extra-data goes here
+  html+=   '</div>'
+  html+=  '</div>'
+  html+= '</div>'
+  html+='</div>'
+
+  sumListArea.append(html);
+  $('#summoners-page .fluid-container').append(sumListArea);
+
 
 }
 

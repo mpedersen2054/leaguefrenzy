@@ -407,7 +407,7 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 .meta .special {
-  margin-top: 0.75em;
+  margin-top: 1.2em;
   position: relative;
   left: 15em;
 }
@@ -431,16 +431,20 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 .ranked-champs h2 {
   font-size: 1.5em;
-  margin-bottom: 0.5em;
+  display: inline-block;
 }
 
-.ranked-champs input {}
+.ranked-champs input {
+  position: relative;
+  bottom: 0.2em;
+  display: inline-block;
+}
 
 /*single ranked champ*/
 
 .ranked-champ {
   margin: 0.4em 0;
-  background-color: #fafafa;
+  background-color: #dedede;
 }
 .ranked-champ img {
   height: 40px;
