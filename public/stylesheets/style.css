@@ -417,7 +417,7 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 .meta .ranked-champs {
-  padding: 0.75em;
+  padding: 2em;
 }
 
 .meta .wl {
@@ -445,6 +445,7 @@ a.btn.btn-xs.add-counter { color: #000; }
 .ranked-champ {
   margin: 0.4em 0;
   background-color: #dedede;
+  max-width: 717px;
 }
 .ranked-champ img {
   height: 40px;

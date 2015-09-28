@@ -160,7 +160,7 @@ var gatherSummonerData = function(options, callback) {
 
 summoners.appendHTML = function(data) {
   console.log('appending html!', data);
-  var rankedSt = data.rankedStats;
+  var rankedStats = data.rankedStats;
   var rankedCh = data.rankedChamps;
   // after all done, append html string to sumlistarea
   var html = '';
@@ -169,26 +169,26 @@ summoners.appendHTML = function(data) {
 
   html+='<div class="meta well">';
   html+= '<div class="general clearfix">';
-  html+=  '<img src="//ddragon.leagueoflegends.com/cdn/5.18.1/img/profileicon/588.png">';
+  html+=  '<img src="//ddragon.leagueoflegends.com/cdn/5.18.1/img/profileicon/'+data.profileIcon+'.png">';
   html+=  '<h2>'+data.name+'</h2>';
   html+= '</div>';
   html+= '<div class="ranked-stats row">';
   html+=  '<div class="col-md-6 col-sm-12 col-xs-12">';
   html+=   '<div class="league-stats">';
-  html+=    '<div>Silver <span>V</span> | <span>90LP</span></div>';
-  html+=   '</div>'
-  html+=   '<div class="league-name">Viktors dicks</div>'
-  html+=  '</div>'
-  html+=  '<div class="col-md-2 col-sm-12 col-xs-12 special">'
-  html+=   '<span><i class="fa fa-fire"></i></span>'
-  html+=   '<span><i class="fa fa-star"></i></span>'
-  html+=  '</div>'
-  html+=  '<div class="col-md-4 col-sm-12 col-xs-12">'
-  html+=   '<div class="wl"><span>wins</span> 7</div>'
-  html+=   '<div class="wl"><span>loses</span> 4</div>'
-  html+=  '</div>'
-  html+= '</div>' // close .ranked-stats
-  html+='</div>' // close .meta
+  html+=    '<div>'+rankedStats.tier+' <span>'+rankedStats.division+'</span> | <span>'+rankedStats.leaguePoints+' LP</span></div>';
+  html+=   '</div>';
+  html+=   '<div class="league-name">'+rankedStats.leagueName+'</div>';
+  html+=  '</div>';
+  html+=  '<div class="col-md-2 col-sm-12 col-xs-12 special">';
+              if (rankedStats.isHotStreak) { html+= '<span><i class="fa fa-fire"></i></span>'; }
+              if (rankedStats.isVeteral) { html+= '<span><i class="fa fa-star"></i></span>'; }
+  html+=  '</div>';
+  html+=  '<div class="col-md-4 col-sm-12 col-xs-12">';
+  html+=   '<div class="wl"><span>wins</span> '+rankedStats.wins+'</div>';
+  html+=   '<div class="wl"><span>loses</span> '+rankedStats.loses+'</div>';
+  html+=  '</div>';
+  html+= '</div>'; // close .ranked-stats
+  html+='</div>'; // close .meta
 
   // ranked-champs
 
@@ -200,20 +200,36 @@ summoners.appendHTML = function(data) {
   html+=  '</div>'
   html+= '</div>'
   html+= '<div class="champ-list row">'
-  html+=  '<div class="col-md-10">'
-  html+=   '<div class="ranked-champ">'
-  html+=    '<img src="//ddragon.leagueoflegends.com/cdn/5.18.1/img/champion/Aatrox.png">'
-  html+=    '<a href="/champions/aatrox" class="name">Aatrox</a>'
-  html+=    '<a href="#" class="more-info">more info <i class="fa fa-angle-down"></i></a>'
-  html+=    '<div class="win-loss">'
-  html+=     '<span class="win">7</span> -'
-  html+=     '<span class="loss">4</span>'
-  html+=    '</div>'
-  // .extra-data goes here
-  html+=   '</div>'
-  html+=  '</div>'
+
+  for (var champ in rankedCh) {
+    var cHtml = '';
+    if (rankedCh[champ].id == 0 || rankedCh[champ].info == undefined) continue;
+    var thumb = '//ddragon.leagueoflegends.com/cdn/5.18.1/img/champion/'+rankedCh[champ].info.thumb;
+    var name = rankedCh[champ].info.name;
+    var champWins = rankedCh[champ].stats.totalSessionsWon;
+    var champLoses = rankedCh[champ].stats.totalSessionsLost;
+
+    console.log(thumb)
+
+    cHtml+=  '<div class="col-md-10">'
+    cHtml+=   '<div class="ranked-champ">'
+    cHtml+=    '<img src="'+thumb+'">'
+    cHtml+=    '<a href="/champions/'+name.toLowerCase()+'" class="name">'+name+'</a>'
+    cHtml+=    '<a href="#" class="more-info">more info <i class="fa fa-angle-down"></i></a>'
+    cHtml+=    '<div class="win-loss">'
+    cHtml+=     '<span class="win">'+champWins+'</span> - '
+    cHtml+=     '<span class="loss">'+champLoses+'</span>'
+    cHtml+=    '</div>'
+    // .extra-data goes here
+    cHtml+=   '</div>'
+    cHtml+=  '</div>'
+
+    html+=cHtml
+  }
+
   html+= '</div>'
   html+='</div>'
+
 
   sumListArea.append(html);
   $('#summoners-page .fluid-container').append(sumListArea);
