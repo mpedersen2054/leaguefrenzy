@@ -5,18 +5,14 @@ body {
   font-size: 16px;
   letter-spacing: 1.2px;
   color: #333;
-  /*background: -webkit-linear-gradient(#00C49F, #2C3E50); /* For Safari 5.1 to 6.0 */
-  /*background: -o-linear-gradient(#00C49F, #2C3E50); /* For Opera 11.1 to 12.0 */
-  /*background: -moz-linear-gradient(#00C49F, #2C3E50); /* For Firefox 3.6 to 15 */
-  /*background: linear-gradient(#00C49F, #2C3E50); /* Standard syntax */
-  background-color: #fefefe;
+  background-color: #efefef;
   text-transform: uppercase;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 } /* 1em === 16px */
 h1,h2,h3,h4,h5,h6 { font-size: 1em; margin: 0; padding: 0; }
 img { width: 100%; }
 .inline { display: inline-block; }
-.well { background-color: #dedede; border-bottom: 1px solid #ddd; outline: none; }
+.well { background-color: #fefefe; border-bottom: 1px solid #ddd; outline: none; }
 .fa { font-weight: 700; font-size: 1.1em; }
 .btn { text-transform: uppercase; }
 
@@ -361,7 +357,7 @@ a.btn.btn-xs.add-counter { color: #000; }
   position: relative;
   left: 50%;
   color: #2F3F4F;
-  display: none;
+  /*display: none;*/
 }
 
 .no-summoner-found span {
@@ -424,9 +420,12 @@ a.btn.btn-xs.add-counter { color: #000; }
   text-align: right;
 }
 
+.ranked-champs .heading {
+}
+
 .ranked-champs .heading,
 .ranked-champs .champ-list {
-  padding: 0.5em 0.75em;
+  padding: 1em;
 }
 
 .ranked-champs h2 {
@@ -436,15 +435,21 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 .ranked-champs input {
   position: relative;
-  bottom: 0.2em;
   display: inline-block;
+  float: right;
+  font-size: 14px;
+  font-weight: 300;
+  border-radius: 2px;
+  padding: 2.5px 0;
+  text-indent: 5px;
+  outline: none;
 }
 
 /*single ranked champ*/
 
 .ranked-champ {
   margin: 0.4em 0;
-  background-color: #dedede;
+  background-color: #fefefe;
   max-width: 717px;
 }
 .ranked-champ img {

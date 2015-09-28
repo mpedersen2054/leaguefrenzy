@@ -5,12 +5,11 @@ summoners._searchDone = false;
 summoners._currentSearch;
 summoners._staticChamps = sc || {};
 
-var sumsearch = $('#summoner-form');
-var spinnerCont = $('.spinner-container'); spinnerCont.detach();
-var input = $('#summoner-filter');
 
-var sumListArea = $('.summoner-list-area');
-sumListArea.detach();
+var sumsearch = $('#summoner-form');
+var input = $('#summoner-filter');
+var spinnerCont = $('.spinner-container'); spinnerCont.detach();
+var sumListArea = $('.summoner-list-area'); sumListArea.detach();
 
 
 summoners.getUri = function(name) {
@@ -32,10 +31,14 @@ summoners.getUri = function(name) {
 summoners.submitSummoner = function() {
   sumsearch.on('submit', function(e) {
     e.preventDefault();
-    spinnerCont.show();
 
     var sumName = input.val().replace(/\W/g, '');
     var url = summoners.getUri(sumName).general;
+
+    spinnerCont.show();
+    $('.meta').remove();
+    $('.ranked-champs').remove();
+    $('#summoners-page .fluid-container').append(spinnerCont);
 
     // gSD callback
     gatherSummonerData({sum: sumName, url: url}, function(err, data) {
@@ -58,6 +61,7 @@ var handleFoundSum = function(data) {
   $('.no-summoner-found').remove();
   spinnerCont.hide();
   summoners.appendHTML(data);
+  input.val('');
 }
 
 
@@ -194,13 +198,14 @@ summoners.appendHTML = function(data) {
 
   html+='<div class="ranked-champs">'
   html+= '<div class="heading row">'
-  html+=  '<div class="col-md-6">'
+  html+=  '<div class="col-md-10">'
   html+=   '<h2>ranked champs</h2>'
-  html+=   '<input type="text" id="ranked-champ-filter" placeholder="Enter name...">'
+  html+=   '<input type="text" id="ranked-champ-filter" placeholder="Enter champ...">'
   html+=  '</div>'
   html+= '</div>'
   html+= '<div class="champ-list row">'
 
+  // each ranked-champ
   for (var champ in rankedCh) {
     var cHtml = '';
     if (rankedCh[champ].id == 0 || rankedCh[champ].info == undefined) continue;
