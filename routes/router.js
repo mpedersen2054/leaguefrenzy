@@ -5,6 +5,18 @@ var fs           = require('fs');
 var _            = require('underscore');
 
 
+router.get('/streamers', function(req, res) {
+  res.render('streamers');
+});
+
+router.get('/streamers/:name', function(req, res) {
+  var name = req.params.name;
+  var chat = 'http://www.twitch.tv/'+name+'/chat';
+  var video = 'http://www.twitch.tv/'+name+'/embed';
+  res.render('streamer', { video: video, chat: chat });
+});
+
+
 router.get('/champions', function(req, res) {
   Champion
     .find()
@@ -75,7 +87,7 @@ router.get('/blah', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-  res.send('hello index')
+  res.render('index');
 });
 
 module.exports = router;

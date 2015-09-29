@@ -20,8 +20,8 @@ a.btn.btn-xs.add-counter { color: #000; }
 .navbar {}
 .navbar-brand { padding: 15px 0; font-size: 1.4em; margin-left: 0.4em; }/
 .navbar-nav li { margin-right: 1em; }
-.container { width: 56em; margin: 0 auto; }
-.fluid-container { max-width: 56em; margin: 0 auto; }
+.container { width: 64em; margin: 0 auto; }
+.fluid-container { max-width: 64em; margin: 0 auto; }
 
 .Mage { background-color:     blue; }
 .Assassin { background-color: orange; }
@@ -478,8 +478,80 @@ a.btn.btn-xs.add-counter { color: #000; }
   display: none;
   background-color: #fcfcfc;
   font-size: 12px;
+}
+
+.ranked-champ .extra-data tr {
   padding-left: 4em;
 }
+
+.ranked-champ .extra-data tr:hover {
+  color: #fff;
+  background-color: #aaa;
+}
+
+
+
+/*
+===== Index
+ */
+
+
+/* Top 20 Streamers */
+
+.streamers {}
+.streamers h3 {
+  font-size: 1.4em;
+  /*text-align: center;*/
+  /*border-bottom: 1px solid red;*/
+  margin-bottom: 0.5em;
+}
+
+.stream {
+  overflow: auto;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.stream:hover {
+  text-decoration: none;
+}
+
+.stream-block {
+  height: 100%;
+  width: 100%;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  text-transform: none;
+  padding: 0.5em;
+}
+.stream-block:last-child {
+  /*border-bottom: 0;*/
+}
+
+.stream-block .title {
+  text-overflow: ellipsis;
+  float: left;
+}
+
+.stream-block .views {
+  text-decoration: none;
+  color: #999;
+  font-size: 0.9em;
+  float: right;
+  margin-top: 2px;
+}
+
+.stream-block:hover .views {
+  text-decoration: none;
+}
+
+.more-streamers {
+  margin-top: 1em;
+}
+
+
+
+
 
 
 /*

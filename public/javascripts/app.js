@@ -1,10 +1,13 @@
 $(function() {
 
+  var path = window.location.pathname;
+
   // add .active depending on /pathname
-  if (window.location.pathname == '/champions') {
-    $('.navbar-nav li').first().addClass('active'); }
-  if (window.location.pathname == '/summoners')
-    { $('.navbar-nav li').last().addClass('active'); }
+  if (path == '/champions') { $('.navbar-nav li').first().addClass('active'); }
+  if (path == '/summoners') { $('.navbar-nav li').last().addClass('active'); }
+
+
+  streamers.getTopStreamers();
 
   champs.champTips();
   champs.showBattleData();
@@ -14,4 +17,5 @@ $(function() {
   champs.vote();
 
   summoners.submitSummoner();
+
 });
