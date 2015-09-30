@@ -1,4 +1,4 @@
-/*#2C3E50,  #00C49F*/
+
 html { position: relative; min-height: 100%; }
 body {
   font-size: 16px;
@@ -501,9 +501,22 @@ a.btn.btn-xs.add-counter { color: #000; }
 .streamers {}
 .streamers h3 {
   font-size: 1.4em;
-  /*text-align: center;*/
-  /*border-bottom: 1px solid red;*/
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding: 0 6px;
+}
+
+.stream-header {
+  font-size: 10px;
+  padding: 0 6px;
+  margin-bottom: 6px;
+  color: #888;
+}
+
+.stream-header .htitle {
+  float: left;
+}
+.stream-header .hviews {
+  float: right;
 }
 
 .stream {
@@ -520,15 +533,19 @@ a.btn.btn-xs.add-counter { color: #000; }
   height: 100%;
   width: 100%;
   color: #444;
-  border-bottom: 1px solid #eee;
   text-transform: none;
-  padding: 0.5em;
+  padding: 8px;
+  background-color: #efefef;
+  margin: 4px 0;
+  border-radius: 4px;
 }
 .stream-block:last-child {
-  /*border-bottom: 0;*/
 }
 
 .stream-block .title {
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
   float: left;
 }
@@ -548,9 +565,6 @@ a.btn.btn-xs.add-counter { color: #000; }
 .more-streamers {
   margin-top: 1em;
 }
-
-
-
 
 
 
