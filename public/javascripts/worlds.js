@@ -54,10 +54,7 @@ worlds.appendHTML = function() {
 
   for (var i in worlds.allGroups) {
     var grp = worlds.allGroups[i];
-    var grpname = grp.shift()
-
-    console.log(grpname)
-    console.log(grp)
+    var grpname = grp.shift();
     var h = '';
 
     h+='<div class="group">';
@@ -92,7 +89,6 @@ worlds.appendHTML = function() {
 
   }
 
-  console.log(mainHtml)
   groups.append(mainHtml);
 
 }

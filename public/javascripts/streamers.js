@@ -1,6 +1,7 @@
 var streamers = streamers || {};
 streamers.topStreamers = [];
 
+var strHeader = $('.stream-header');
 
 var getStreamers = function(options, callback) {
   var limit = options.limit || 100;
@@ -9,24 +10,54 @@ var getStreamers = function(options, callback) {
   $.ajax({ url: url, type: 'GET' })
     .success(function(data) { callback(null, data); })
     .fail(function(x, s, e) { callback(e, null); })
-
 }
 
 
-streamers.init = function() {
+streamers.init = function(path) {
+
+  // add spinner where streamers will go
+  var spinner = $('<i></i>');
+  spinner
+    .addClass('fa fa-circle-o-notch fa-spin spinner')
+    .css({ 'font-size': '2em', 'position': 'relative', 'left': '43%', 'color': '#777', 'margin-top': '2em' })
+
+  // get all streamers, route to either top15 or all
   getStreamers({}, function(err, data) {
     $.each(data.streams, function(i, str) {
       streamers.topStreamers.push(str);
     });
-    streamers.appendTop20();
+
+    if (path == 'part') {
+      strHeader.after(spinner);
+      streamers.appendTop15();
+    }
+    if (path == 'all')  { streamers.appendAll(); }
+
   });
 }
 
 
-streamers.appendTop20 = function() {
-  var twon = streamers.topStreamers.slice(0, 20);
+streamers.appendTop15 = function() {
+  var fift = streamers.topStreamers.slice(0, 15);
+  var html = '';
 
+  for (var i in fift) {
+    var streamer = fift[i];
+    var h = '';
 
+    h+='<a href="#" class="stream" alt="'+streamer.channel.name+'">';
+    h+='<div class="stream-block clearfix">';
+    h+='<div class="title">'+streamer.channel.status+'</div>';
+    h+='<div class="views">'+streamer.viewers+'</div>';
+    h+='</div>';
+    h+='</a>';
+
+    html+=h;
+  }
+
+  html+='<a href="/streamers" class="btn btn-xs btn-success more-streamers">more</a>';
+  $('.spinner').detach();
+  $('.stream-header').after(html);
 }
 
 

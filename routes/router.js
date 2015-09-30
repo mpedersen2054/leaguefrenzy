@@ -79,7 +79,7 @@ router.post('/downvote', function(req, res) {
 });
 
 router.get('/summoners', function(req, res) {
-  res.render('summoners')
+  res.render('summoners');
 });
 
 router.get('/blah', function(req, res) {

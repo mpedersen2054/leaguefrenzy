@@ -498,7 +498,9 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 /* Top 20 Streamers */
 
-.streamers {}
+.streamers .well {
+  min-height: 300px;
+}
 .streamers h3 {
   font-size: 1.4em;
   font-weight: 600;
@@ -540,7 +542,8 @@ a.btn.btn-xs.add-counter { color: #000; }
   margin: 6px 0;
   border-radius: 4px;
 }
-.stream-block:last-child {
+.stream-block:hover {
+  background-color: #ccc;
 }
 
 .stream-block .title {
