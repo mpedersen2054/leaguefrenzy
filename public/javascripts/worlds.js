@@ -1,5 +1,8 @@
 
 var worlds = worlds || {};
+worlds.allGroups = [];
+worlds.groupa = ['a']; worlds.groupb = ['b'];
+worlds.groupc = ['c']; worlds.groupd = ['d'];
 worlds.teams = [
   // NA
   { name: 'Cloud 9', acro: 'C9', region: 'NA', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/cloud9-fld3b885.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 3, group: 'B' },
@@ -25,4 +28,71 @@ worlds.teams = [
   { name: 'Pain Gaming', acro: 'PG', region: 'WLD', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/pain-gaming-2wk5hx3u.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 0, group: 'A' }
 ];
 
-console.log(worlds.teams);
+
+worlds.init = function() {
+  // set groups
+  for (var i in worlds.teams) {
+    var team = worlds.teams[i];
+    if (team.group == 'A') { worlds.groupa.push(team); }
+    if (team.group == 'B') { worlds.groupb.push(team); }
+    if (team.group == 'C') { worlds.groupc.push(team); }
+    if (team.group == 'D') { worlds.groupd.push(team); }
+  }
+
+  worlds.allGroups.push(worlds.groupa);
+  worlds.allGroups.push(worlds.groupb);
+  worlds.allGroups.push(worlds.groupc);
+  worlds.allGroups.push(worlds.groupd);
+
+  worlds.appendHTML();
+}
+
+
+worlds.appendHTML = function() {
+  var groups = $('.groups');
+  var mainHtml = '';
+
+  for (var i in worlds.allGroups) {
+    var grp = worlds.allGroups[i];
+    var grpname = grp.shift()
+
+    console.log(grpname)
+    console.log(grp)
+    var h = '';
+
+    h+='<div class="group">';
+    h+='<h4>Group '+grpname+'</h4>';
+    h+='<div class="row">';
+    // each team in grp
+    for (var i in grp) {
+      var team = grp[i];
+      var html = '';
+
+      html+='<div class="col-md-3">';
+      html+='<a href="#" class="team">';
+      html+='<div class="team-block">';
+      html+='<div class="logo">';
+      html+='<img src="'+team.logo+'" alt="">';
+      html+='</div>';
+      html+='<div class="acro">'+team.acro+'</div>';
+      html+='<div class="region">'+team.region+'</div>';
+      html+='<div class="record">';
+      html+='<span>'+team.record.wins+'</span> - <span>'+team.record.loses+'</span>';
+      html+='</div>';
+      html+='</div>';
+      html+='</a>';
+      html+='</div>';
+
+      h+=html;
+    }
+    h+='</div>';
+    h+='</div>';
+
+    mainHtml+=h;
+
+  }
+
+  console.log(mainHtml)
+  groups.append(mainHtml);
+
+}

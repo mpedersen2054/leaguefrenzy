@@ -43,6 +43,7 @@ var handleFoundSum = function(data) {
   $('.no-summoner-found').remove();
   spinnerCont.hide();
   summoners.appendHTML(data);
+  summoners._prevSearches.push(input.val());
   input.val('');
 }
 
@@ -290,6 +291,3 @@ summoners.rankedChampMoreInfo = function() {
     extraData.slideToggle();
   });
 }
-
-
-

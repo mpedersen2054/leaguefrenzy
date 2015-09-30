@@ -1,6 +1,16 @@
 var champs = {};
 champs._currentVotes = [];
 
+
+champs.init = function() {
+  this.champTips();
+  this.showBattleData();
+  this.searchChampion();
+  this.spellHover();
+  this.showTenCounters();
+  this.vote();
+}
+
 champs.champTips = function() {
   var tst = $('.toggle-tips');
   var enemyTipsUl = $('.enemy-tips ul');

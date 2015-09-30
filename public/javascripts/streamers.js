@@ -13,7 +13,7 @@ var getStreamers = function(options, callback) {
 }
 
 
-streamers.getTopStreamers = function() {
+streamers.init = function() {
   getStreamers({}, function(err, data) {
     $.each(data.streams, function(i, str) {
       streamers.topStreamers.push(str);

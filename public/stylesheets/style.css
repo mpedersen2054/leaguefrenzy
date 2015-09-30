@@ -570,52 +570,38 @@ a.btn.btn-xs.add-counter { color: #000; }
 
 /* Worlds Tournament */
 
+.worlds { margin-bottom: 8em; }
 .worlds .well {
   padding-left: 1.875em;
   padding-right: 1.875em;
 }
 
-.worlds h3 {
-  font-size: 1.4em;
-  font-weight: 600;
-  margin-bottom: 1em;
-  padding: 0 6px;
-  margin-bottom: 40px;
+.group {
+  margin-bottom: 30px;
 }
 
-
-.groups {}
-
-.group {}
 .group h4 {
   font-size: 1.2em;
   font-weight: 400;
-  margin-top: 40px;
   margin-bottom: 20px;
-  text-align: center;
 }
 
-.team:hover {
-  text-decoration: none;
-}
+.team:hover { text-decoration: none; }
 
 .team-block {
   padding: 0.3em 1em;
   border: 1px solid #eee;
-  background-color: #fafafa;
+  background-color: #efefef;;
   border-radius: 4px;
   color: #444;
   text-decoration: none;
 }
-.team-block:hover {
-  background-color: #eee;
-}
+.team-block:hover { background-color: #ccc; }
 
 .team-block .logo {}
 .team-block .acro {
   font-size: 1.4em;
   font-weight: 300;
-  /*text-align: center;*/
   float: left;
 }
 .team-block .region {
