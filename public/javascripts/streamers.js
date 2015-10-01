@@ -20,6 +20,7 @@ streamers.init = function(path) {
   spinner
     .addClass('fa fa-circle-o-notch fa-spin spinner')
     .css({ 'font-size': '2em', 'position': 'relative', 'left': '43%', 'color': '#777', 'margin-top': '2em' })
+  strHeader.after(spinner);
 
   // get all streamers, route to either top15 or all
   getStreamers({}, function(err, data) {
@@ -27,10 +28,7 @@ streamers.init = function(path) {
       streamers.topStreamers.push(str);
     });
 
-    if (path == 'part') {
-      strHeader.after(spinner);
-      streamers.appendTop15();
-    }
+    if (path == 'part') { streamers.appendTop15(); }
     if (path == 'all')  { streamers.appendAll(); }
 
   });
@@ -41,11 +39,14 @@ streamers.appendTop15 = function() {
   var fift = streamers.topStreamers.slice(0, 15);
   var html = '';
 
+  console.log(fift)
+
   for (var i in fift) {
     var streamer = fift[i];
+    var channelUrl = streamer.channel.url.split('/').pop();
     var h = '';
 
-    h+='<a href="#" class="stream" alt="'+streamer.channel.name+'">';
+    h+='<a href="/streamers/'+channelUrl+'" class="stream" alt="'+streamer.channel.name+'">';
     h+='<div class="stream-block clearfix">';
     h+='<div class="title">'+streamer.channel.status+'</div>';
     h+='<div class="views">'+streamer.viewers+'</div>';

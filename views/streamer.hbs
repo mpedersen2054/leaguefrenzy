@@ -1,8 +1,23 @@
 
 <div id="streamer-page">
-  <div class="container">
-    <h1>hello single stream page!!</h1>
-    {{video}}
-    {{chat}}
+  <div class="fluid-container">
+
+    <h1><span>{{name}}'s</span> Stream</h1>
+
+    <div class="row stream-elements">
+
+      <div class="col-md-6">
+
+        <iframe height="378" width="510" frameborder="0" scrolling="no" src="{{video}}"></iframe>
+
+      </div>
+
+      <div class="col-md-6">
+
+        <iframe id="player" type="text/html" width="510" height="378" src="{{chat}}" frameborder="0"></iframe>
+
+      </div>
+
+    </div>
   </div>
 </div>

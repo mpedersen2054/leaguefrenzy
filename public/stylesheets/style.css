@@ -341,13 +341,6 @@ a.btn.btn-xs.add-counter { color: #000; }
 ===== Find Summoner Page
  */
 
-.spinner {
-  font-size: 2em;
-  position: relative;
-  left: 50%;
-  color: #fff;
-  /*display: none;*/
-}
 
 .no-summoner-found span {
   color: red;
@@ -355,8 +348,6 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 /* Summoner Meta */
-
-.meta {}
 
 .meta .general {
   padding: 0.75em;
@@ -502,8 +493,8 @@ a.btn.btn-xs.add-counter { color: #000; }
   min-height: 300px;
 }
 .streamers h3 {
-  font-size: 1.4em;
-  font-weight: 600;
+  font-size: 1.2em;
+  font-weight: 400;
   margin-bottom: 1em;
   padding: 0 6px;
 }
@@ -590,6 +581,8 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 .team:hover { text-decoration: none; }
+.team:visited { text-decoration: none; }
+.team:active { text-decoration: none; }
 
 .team-block {
   padding: 0.3em 1em;
@@ -622,7 +615,21 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 
+/*Single Streamer*/
 
+#streamer-page {}
+#streamer-page h1 {
+  font-size: 2.25em;
+  font-weight: 300;
+  text-align: center;
+}
+#streamer-page h1 span {
+  font-weight: 600;
+}
+
+.stream-elements {
+  margin-top: 4em;
+}
 
 
 
@@ -650,6 +657,17 @@ a.btn.btn-xs.add-counter { color: #000; }
 
   #ranked-champ-filter {
     float: none;
+  }
+
+  /*.team-block {
+    margin-bottom: 2em;
+  }*/
+}
+
+/*medium*/
+@media (max-width: 47.9em) {
+  .team-block {
+    margin-bottom: 2em;
   }
 }
 

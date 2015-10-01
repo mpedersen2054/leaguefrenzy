@@ -9,11 +9,11 @@ router.get('/streamers', function(req, res) {
   res.render('streamers');
 });
 
-router.get('/streamers/:name', function(req, res) {
-  var name = req.params.name;
-  var chat = 'http://www.twitch.tv/'+name+'/chat';
-  var video = 'http://www.twitch.tv/'+name+'/embed';
-  res.render('streamer', { video: video, chat: chat });
+router.get('/streamers/:strname', function(req, res) {
+  var path = req.params.strname;
+  var chat = '//www.twitch.tv/'+path+'/chat';
+  var video = '//www.twitch.tv/'+path+'/embed';
+  res.render('streamer', { name: path, video: video, chat: chat });
 });
 
 
