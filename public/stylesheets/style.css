@@ -18,7 +18,6 @@ img { width: 100%; }
 .btn > i { margin-left: 0.5em; position: relative; bottom: 0.1em; }
 a.btn.btn-xs { color: #fff; padding: 0.25em 0.5em; min-width: 5.2em; }
 a.btn.btn-xs.add-counter { color: #000; }
-.navbar {}
 .navbar-brand { padding: 15px 0; font-size: 1.4em; margin-left: 0.4em; }/
 .navbar-nav li { margin-right: 1em; }
 .container { width: 64em; margin: 0 auto; }
