@@ -2,6 +2,7 @@ var streamers = streamers || {};
 streamers.topStreamers = [];
 
 var strHeader = $('.stream-header');
+var tblResp = $('#streamers-page .table-responsive');
 
 var getStreamers = function(options, callback) {
   var limit = options.limit || 100;
@@ -19,8 +20,11 @@ streamers.init = function(path) {
   var spinner = $('<i></i>');
   spinner
     .addClass('fa fa-circle-o-notch fa-spin spinner')
-    .css({ 'font-size': '2em', 'position': 'relative', 'left': '43%', 'color': '#777', 'margin-top': '2em' })
+    .css({ 'font-size': '2em', 'position': 'relative', 'left': '43%', 'color': '#777', 'margin-top': '2em' });
+
+  // add spinner to either header of Twenty, or after .table-responsive of All Streamers
   strHeader.after(spinner);
+  tblResp.after(spinner);
 
   // get all streamers, route to either top15 or all
   getStreamers({}, function(err, data) {
@@ -61,4 +65,42 @@ streamers.appendTop15 = function() {
   $('.stream-header').after(html);
 }
 
+
+
+streamers.appendAll = function() {
+  var allStreamers = $('.all-streamers');
+  var h = '';
+
+  var spinner = $('<i></i>');
+  spinner
+    .addClass('fa fa-circle-o-notch fa-spin spinner')
+    .css({ 'font-size': '2em', 'position': 'relative', 'left': '50%', 'color': '#444', 'margin-top': '2em' })
+    .show()
+
+  function getHTML(callback) {
+
+    for (var i in streamers.topStreamers) {
+      var streamer = streamers.topStreamers[i];
+      var html = '';
+      var date = new Date(streamer.channel.created_at);
+      var channelUrl = streamer.channel.url.split('/').pop();
+
+      html+='<tr>'
+      html+='<td class="stream-name"><a href="streamers/'+channelUrl+'">'+streamer.channel.status+'</a></td>'
+      html+='<td class="streamer-name">'+streamer.channel.display_name+'</td>'
+      html+='<td class="viewers">'+streamer.viewers+'</td>'
+      html+='</tr>'
+
+      h+=html;
+    }
+
+    callback(h);
+  }
+
+  getHTML(function(html) {
+    $('.spinner').detach();
+    allStreamers.append(html).show();
+  })
+
+}
 

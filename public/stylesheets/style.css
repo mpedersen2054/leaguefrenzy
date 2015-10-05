@@ -9,6 +9,7 @@ body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 h1,h2,h3,h4,h5,h6 { font-size: 1em; margin: 0; padding: 0; }
+/*.table { max-width: none; table-layout: fixed; word-wrap: break-word; }*/
 img { width: 100%; }
 .inline { display: inline-block; }
 .well { background-color: #fefefe; border-bottom: 1px solid #ddd; outline: none; }
@@ -632,6 +633,46 @@ a.btn.btn-xs.add-counter { color: #000; }
 }
 
 
+/*
+===== All Streamers
+ */
+
+#streamers-page h1 {
+  font-size: 2.25em;
+}
+
+.all-streamers {
+  margin-top: 2.25em;
+  margin-bottom: 10em;
+  max-width: 64em;
+  display: none;
+}
+
+.all-streamers tr {
+}
+
+.all-streamers .stream-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+  /*height: 40px;*/
+  float: left;
+
+}
+
+.all-streamers .stream-name a {
+  color: #444;
+  text-decoration: none;
+}
+
+.all-streamers .viewers {
+  /*width: 200px;*/
+}
+
+.all-streamers .streamer-name {
+  /*width: 200px;*/
+}
 
 
 /*

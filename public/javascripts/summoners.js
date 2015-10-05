@@ -190,8 +190,8 @@ summoners.appendHTML = function(data) {
   html+=   '<div class="league-name">'+rankedStats.leagueName+'</div>';
   html+=  '</div>';
   html+=  '<div class="col-md-2 col-sm-12 col-xs-12 special">';
-              if (rankedStats.isHotStreak) { html+= '<span><i class="fa fa-fire"></i></span>'; }
-              if (rankedStats.isVeteral) { html+= '<span><i class="fa fa-star"></i></span>'; }
+            if (rankedStats.isHotStreak) { html+= '<span><i class="fa fa-fire"></i></span>'; }
+            if (rankedStats.isVeteral) { html+= '<span><i class="fa fa-star"></i></span>'; }
   html+=  '</div>';
   html+=  '<div class="col-md-4 col-sm-12 col-xs-12">';
   html+=   '<div class="wl"><span>wins</span> '+rankedStats.wins+'</div>';

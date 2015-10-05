@@ -3,11 +3,16 @@
   <div class="fluid-container">
     <h1>All Streamers</h1>
 
-    <div class="streamers">
-      <div class="streamer">
-        <div class="name">Matts super awesome stream</div>
-        <div class="views">101020</div>
-      </div>
+    <div class="table-responsive">
+      <table class="all-streamers table table-striped">
+        {{!-- append each streamer here --}}
+
+        <tr>
+          <th>name</th>
+          <th><i class = "fa fa-gamepad"></i></th> {{!-- game --}}
+          <th><i class = "fa fa-user"></i></th> {{!-- viewers --}}
+        </tr>
+      </table>
     </div>
   </div>
 </div>
