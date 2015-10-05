@@ -4,6 +4,10 @@ var staticChamps = require('../static_champs.json');
 var fs           = require('fs');
 var _            = require('underscore');
 
+router.get('/hihi', function(req, res) {
+  res.json({hello: 'there123', bye: 'from123'});
+});
+
 
 router.get('/streamers', function(req, res) {
   res.render('streamers');
