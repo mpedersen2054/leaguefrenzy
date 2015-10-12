@@ -1,0 +1,225 @@
+/*
+===== Single Champion Page
+ */
+
+#champion-page {
+  margin: 1em 0 6em 0;
+}
+
+.champ-meta {
+  padding: 0 4em 2em 1em;
+}
+
+.Mage { background-color:     blue; }
+.Assassin { background-color: orange; }
+.Tank { background-color:     green; }
+.Support { background-color:  pink; }
+.Marksman { background-color: red; }
+.Fighter { background-color:  yellow; }
+.Mage, .Assassin, .Tank, .Support, .Marksman, .Fighter { opacity: 0.5; }
+
+.champ-thumb {
+  width: 8em;
+  height: 8em;
+  float: left;
+  margin-top: 0.6em;
+  margin-right: 2em;
+}
+
+.champ-name {
+  opacity: 1.0;
+  font-size: 4em;
+  font-weight: 600;
+  color: #000;
+  margin-top: 0.1em;
+}
+
+.champ-title {
+  opacity: 1.0;
+  font-size: 1.6em;
+  color: #666;
+  font-weight: 400;
+  margin-bottom: 0.2em;
+}
+
+/* Champ Spells */
+.champ-spells {
+  margin: 1em 1em;
+}
+
+.spell {
+  position: relative;
+  width: 20%;
+  float: left;
+  padding: 0.25em;
+  z-index: 3;
+}
+
+.spell img {
+  border-radius: 3px;
+}
+
+.spell-name {
+  position: relative;
+  top: -75px;
+  font-size: 0.5em;
+  max-width: 20%;
+  margin: 0;
+  line-height: 0.2;
+  z-index: -1;
+}
+
+/* Progress Bars */
+
+.champ-stats {
+  position: relative;
+  top: -50px;
+  margin-bottom: 1.5em;
+}
+
+.progress {
+  margin-bottom: 0.5em;
+  height: 2em;
+}
+
+.attack {
+  background-color: red;
+}
+.defense {
+  background-color: green;
+}
+.magic {
+  background-color: blue;
+}
+.difficulty {
+  background-color: purple;
+}
+
+/* Champ Tips */
+
+.tips {}
+
+.ally-tips,
+.enemy-tips {
+  text-transform: none;
+  font-size: 0.83em;
+}
+
+.ally-tips h5 {
+  background-color: #C6FAC1;
+  padding: 1em 1.5em;
+  border-radius: 0.33333em;
+  color: #666;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  cursor: pointer;
+}
+.enemy-tips h5 {
+  background-color: #FAD1B6;
+  padding: 1em 1.5em;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: #666;
+  cursor: pointer;
+}
+
+.ally-tips {
+  margin-top: 1.25em;
+  border: 1px solid #C6FAC1;
+  border-radius: 0.4em;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.enemy-tips {
+  border: 1px solid #FAD1B6;
+  border-radius: 0.4em;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ally-tips ul,
+.enemy-tips ul {
+  display: none;
+  padding-left: 0;
+}
+
+.ally-tips ul li,
+.enemy-tips ul li {
+  list-style: none;
+  padding: 0.75em 1.5em;
+  border-bottom: 1px solid #ddd;
+}
+
+.ally-tips ul li:last-child,
+.enemy-tips ul li:last-child {
+  border-bottom: none;
+}
+
+/*
+===== Single Champion Counters
+ */
+
+.counters h2 {
+  font-size: 1.8em;
+  color: #000;
+  margin-bottom: 0.3em;
+  font-weight: 600;
+  margin-top: 0.3em;
+}
+
+.counters a { color: #666; text-decoration: none }
+
+.good-against .champ,
+.bad-against .champ {
+  padding: .75em;
+  font-size: 1em;
+  margin: 0.4em 0;
+  border-radius: 0.33333em;
+  background-color: #fafafa;
+  border: 2px solid #ccc;
+}
+
+.champ .position {
+  font-size: 0.6em;
+}
+
+.votes {
+  position: relative;
+  bottom: 0.2em;
+  float: right;
+}
+
+.votes .upvote { color: #65E117; }
+.votes .downvote { color: #FF4F49; }
+
+.more-champs,
+.less-champs {
+  text-align: center;
+}
+
+.add-counter {
+  color: #000;
+}
+
+/*Battle Data*/
+
+.battle-data {
+  display: none;
+}
+
+.battle-data-button {
+  margin-bottom: 0.75em;
+  float: right;
+  position: relative;
+  left: 4em;
+  top: 1em;
+}
+
+.battle-data-button a.btn {
+  color: #333;
+}
+
+.more-info {}
+.less-info {
+  display: none;
+}

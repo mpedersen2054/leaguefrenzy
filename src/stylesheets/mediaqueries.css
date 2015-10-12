@@ -1,0 +1,63 @@
+/*
+===== Media Queries
+ */
+
+/*small*/
+@media (max-width: 32.5em) {
+  body { font-size: 14px; }
+  #champ-filter,
+  #summoner-filter {
+    max-width: 18em;
+  }
+
+  .glass {
+    left: 15em;
+    bottom: 2em;
+  }
+
+  .ranked-champ .name {
+    font-size: 10px;
+  }
+
+  #ranked-champ-filter {
+    float: none;
+  }
+
+  /*.team-block {
+    margin-bottom: 2em;
+  }*/
+}
+
+/*medium*/
+@media (max-width: 47.9em) {
+  .team-block {
+    margin-bottom: 2em;
+  }
+}
+
+/*large*/
+@media (max-width: 56.25em) {
+  .well,
+  .counters .champ {
+    padding: 1em;
+  }
+  .navbar-brand {
+    margin-left: 0.8em;
+  }
+  .fluid-container { max-width: 56em; margin: 0 1em; }
+  .good-against .champ,
+  .bad-against .champ {
+    padding: 0.8em 0.5em;
+    margin: 0.2em 1em;
+  }
+  .good-against h2,
+  .bad-against h2 {
+    text-align: center;
+  }
+  .good-against,
+  .bad-against {
+    margin-top: 2em;
+  }
+
+  .counters a { font-size: 0.8em; }
+}

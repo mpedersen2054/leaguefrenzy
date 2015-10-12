@@ -1,0 +1,131 @@
+/*
+===== Index
+ */
+
+
+/* Top 20 Streamers */
+
+.streamers .well {
+  min-height: 300px;
+}
+.streamers h3 {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-bottom: 1em;
+  padding: 0 6px;
+}
+
+.stream-header {
+  font-size: 10px;
+  padding: 0 6px;
+  margin-bottom: 6px;
+  color: #888;
+}
+
+.stream-header .htitle {
+  float: left;
+}
+.stream-header .hviews {
+  float: right;
+}
+
+.stream {
+  overflow: auto;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.stream:hover {
+  text-decoration: none;
+}
+
+.stream-block {
+  height: 100%;
+  width: 100%;
+  color: #444;
+  text-transform: none;
+  padding: 6px;
+  background-color: #efefef;
+  margin: 6px 0;
+  border-radius: 4px;
+}
+.stream-block:hover {
+  background-color: #ccc;
+}
+
+.stream-block .title {
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  float: left;
+}
+
+.stream-block .views {
+  text-decoration: none;
+  color: #999;
+  font-size: 0.9em;
+  float: right;
+  margin-top: 2px;
+}
+
+.stream-block:hover .views {
+  text-decoration: none;
+}
+
+.more-streamers {
+  margin-top: 1em;
+}
+
+
+/* Worlds Tournament */
+
+.worlds { margin-bottom: 8em; }
+.worlds .well {
+  padding-left: 1.875em;
+  padding-right: 1.875em;
+}
+
+.group {
+  margin-bottom: 30px;
+}
+
+.group h4 {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.team:hover { text-decoration: none; }
+.team:visited { text-decoration: none; }
+.team:active { text-decoration: none; }
+
+.team-block {
+  padding: 0.3em 1em;
+  border: 1px solid #eee;
+  background-color: #efefef;;
+  border-radius: 4px;
+  color: #444;
+  text-decoration: none;
+}
+.team-block:hover { background-color: #ccc; }
+
+.team-block .logo {}
+.team-block .acro {
+  font-size: 1.4em;
+  font-weight: 300;
+  float: left;
+}
+.team-block .region {
+  font-size: 0.8em;
+  margin-top: 5px;
+  float: right;
+  color: #999;
+}
+.team-block .record {
+  font-size: 1.5em;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  clear: both;
+  text-align: center;
+}

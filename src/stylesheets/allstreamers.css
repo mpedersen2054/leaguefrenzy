@@ -1,0 +1,40 @@
+/*
+===== All Streamers
+ */
+
+#streamers-page h1 {
+  font-size: 2.25em;
+}
+
+.all-streamers {
+  margin-top: 2.25em;
+  margin-bottom: 10em;
+  max-width: 64em;
+  display: none;
+}
+
+.all-streamers tr {
+}
+
+.all-streamers .stream-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+  /*height: 40px;*/
+  float: left;
+
+}
+
+.all-streamers .stream-name a {
+  color: #444;
+  text-decoration: none;
+}
+
+.all-streamers .viewers {
+  /*width: 200px;*/
+}
+
+.all-streamers .streamer-name {
+  /*width: 200px;*/
+}

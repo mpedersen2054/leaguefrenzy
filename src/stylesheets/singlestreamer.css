@@ -1,0 +1,15 @@
+/*Single Streamer*/
+
+#streamer-page {}
+#streamer-page h1 {
+  font-size: 2.25em;
+  font-weight: 300;
+  text-align: center;
+}
+#streamer-page h1 span {
+  font-weight: 600;
+}
+
+.stream-elements {
+  margin-top: 4em;
+}

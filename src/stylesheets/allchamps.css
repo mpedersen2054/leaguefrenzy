@@ -1,0 +1,35 @@
+/*
+===== All Champs Page
+ */
+
+.champs-list-area {
+  padding: 0 0.2em;
+}
+
+#champions-page,
+#summoners-page {
+  margin-bottom: 5em;
+}
+
+#champions-page .champ {
+  margin-bottom: 0.6em;
+}
+
+#champions-page .champ img {
+  border-radius: 0.33333em;
+}
+
+#champions-page .champ a:hover {
+  text-decoration: none;
+}
+
+#champions-page .champ .name {
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  top: -1.3em;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: 400;
+}
