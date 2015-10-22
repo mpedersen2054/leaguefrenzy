@@ -1,6 +1,7 @@
 
 var worlds = worlds || {};
 worlds.allGroups = [];
+worlds.currentTab = 'group';
 
 // for group stage
 // first element of each array is the group letter
@@ -37,29 +38,29 @@ worlds.teams = [
 worlds.ko = {};
 worlds.ko.qfinal = [];
 
-// add teams to KO stage & add properties
+// add teams to KO stage & clone & add properties
 // seeds : 1 vs 8, 4 vs 5, 2 vs 7, 3 vs 6
-function addTeamToKnockout(acro, stage, seed) {
+function addTeamToKnockout(acro, seed) {
   var team = _.clone(worlds.teams[_.findIndex(worlds.teams, { acro: acro })]);
   team.koseed = seed;
   team.knockoutStage = {
     record: { w: 0, l: 0 },
-    qfinal:true,
+    qfinal:true ,
     sfinal:false,
     gfinal:false
   };
-  worlds.ko[stage].push(team);
+  worlds.ko.qfinal.push(team);
 }
 
 // double elimination bracket according to lcs.bracket
-addTeamToKnockout('YOE', 'qfinal', 1);
-addTeamToKnockout('FNC', 'qfinal', 2);
-addTeamToKnockout('KT', 'qfinal', 3);
-addTeamToKnockout('SKT', 'qfinal', 4);
-addTeamToKnockout('AHQ', 'qfinal', 5);
-addTeamToKnockout('KOO', 'qfinal', 6);
-addTeamToKnockout('EDG', 'qfinal', 7);
-addTeamToKnockout('OG', 'qfinal', 8);
+addTeamToKnockout('YOE', 1);
+addTeamToKnockout('FNC', 2);
+addTeamToKnockout('KT' , 3);
+addTeamToKnockout('SKT', 4);
+addTeamToKnockout('AHQ', 5);
+addTeamToKnockout('KOO', 6);
+addTeamToKnockout('EDG', 7);
+addTeamToKnockout('OG' , 8);
 
 function playGame(t1seed, t2seed, outcome, victorid, nextStage) {
   // tXs is team1 seed & team2 seed
@@ -86,7 +87,7 @@ function playGame(t1seed, t2seed, outcome, victorid, nextStage) {
   }
 }
 
-// SEMIFINALS
+// QUARTERFINALS
 // seeds : 1 vs 8, 4 vs 5, 2 vs 7, 3 vs 6
 playGame(1, 8, { w: 3, l: 1 }, 8, 'sfinal');
 playGame(4, 5, { w: 3, l: 0 }, 4, 'sfinal');
@@ -98,7 +99,7 @@ var sfinal = _.filter(worlds.ko.qfinal, function(team) {
 });
 
 
-// SEMIFINAL ( implement sat/sun )
+// SEMIFINALS ( implement sat/sun )
 worlds.ko.sfinal = sfinal;
 // playGame(1, 8, { w: 3, l: 1 }, 8, 'sfinal');
 // playGame(1, 8, { w: 3, l: 1 }, 8, 'sfinal');
@@ -120,11 +121,48 @@ worlds.init = function() {
   worlds.allGroups.push(worlds.groupc);
   worlds.allGroups.push(worlds.groupd);
 
-  worlds.appendHTML();
+  // show groupstage initially
+  $('.groups').show();
+
+  worlds.setTabsClickEv();
+  worlds.appendKOStageHTML();
+  worlds.appendGroupStageHTML();
 }
 
 
-worlds.appendHTML = function() {
+worlds.setTabsClickEv = function() {
+  var tabs = $('.tabs a');
+
+  tabs.on('click', function(e) {
+    e.preventDefault();
+    var tabName = $(this).data('tab');
+
+    if (tabName === 'groups' && worlds.currentTab != tabName) {
+      worlds.currentTab = tabName;
+      $('.knockouts').hide();
+      $('.groups').show();
+    }
+    else if (tabName === 'knockouts' && worlds.currentTab != tabName) {
+      worlds.currentTab = tabName;
+      console.log('ko\'s clicked!');
+      $('.groups').hide();
+      $('.knockouts').show();
+    }
+    else {
+      console.log('already on that tab!');
+      return;
+    }
+
+  });
+}
+
+worlds.appendKOStageHTML = function() {
+  var kos = $('.knockouts');
+  kos.append('<h2>hello knockouts</h2>');
+  console.log('should append kos')
+}
+
+worlds.appendGroupStageHTML = function() {
   var groups = $('.groups');
   var mainHtml = '';
 

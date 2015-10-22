@@ -44,6 +44,7 @@ streamers.appendTop15 = function() {
 
   for (var i in fift) {
     var streamer = fift[i];
+    if (!streamer) return;
     var channelUrl = streamer.channel.url.split('/').pop();
     var h = '';
 

@@ -2,7 +2,6 @@
 ===== Index
  */
 
-
 /* Top 20 Streamers */
 
 .streamers .well {
@@ -86,11 +85,20 @@
   padding-right: 1.875em;
 }
 
-.group {
+.groups,
+.knockouts {
+  clear: both;
+}
+
+.stage {
+  display: none;
+}
+
+.groups .group {
   margin-bottom: 30px;
 }
 
-.group h4 {
+.groups .group h4 {
   font-size: 1.2em;
   font-weight: 400;
   margin-bottom: 20px;
@@ -100,7 +108,7 @@
 .team:visited { text-decoration: none; }
 .team:active { text-decoration: none; }
 
-.team-block {
+.groups .team-block {
   padding: 0.3em 1em;
   border: 1px solid #eee;
   background-color: #efefef;;
@@ -108,24 +116,50 @@
   color: #444;
   text-decoration: none;
 }
-.team-block:hover { background-color: #ccc; }
+.groups .team-block:hover { background-color: #ccc; }
 
-.team-block .logo {}
-.team-block .acro {
+.groups .team-block .acro {
   font-size: 1.4em;
   font-weight: 300;
   float: left;
 }
-.team-block .region {
+.groups .team-block .region {
   font-size: 0.8em;
   margin-top: 5px;
   float: right;
   color: #999;
 }
-.team-block .record {
+.groups .team-block .record {
   font-size: 1.5em;
   padding-top: 8px;
   padding-bottom: 8px;
   clear: both;
   text-align: center;
+}
+
+.tabs {
+  padding-bottom: 1em;
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #eee;
+}
+
+.tabs > a {
+  text-decoration: none;
+  color: #aaa;
+  font-size: 0.8em;
+}
+
+.tabs > a.disabled {
+}
+
+.tabs .group-stg {
+  float: left;
+}
+.tabs .knockout-stg {
+  float: right;
+}
+
+.tabs .group-stg,
+.tabs .knockout-stg {
+  display: inline-block;
 }
