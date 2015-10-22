@@ -38,12 +38,9 @@ streamers.init = function(path) {
   });
 }
 
-
 streamers.appendTop15 = function() {
   var fift = streamers.topStreamers.slice(0, 15);
   var html = '';
-
-  console.log(fift)
 
   for (var i in fift) {
     var streamer = fift[i];

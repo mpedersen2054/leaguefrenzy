@@ -1,8 +1,13 @@
 
 var worlds = worlds || {};
 worlds.allGroups = [];
+
+// for group stage
+// first element of each array is the group letter
+// group : [ 'a', { ... }, { ... }, { ... }, { ... } ]
 worlds.groupa = ['a']; worlds.groupb = ['b'];
 worlds.groupc = ['c']; worlds.groupd = ['d'];
+
 worlds.teams = [
   // NA
   { name: 'Cloud 9', acro: 'C9', region: 'NA', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/cloud9-fld3b885.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 3, group: 'B', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/cloud9' },
@@ -13,8 +18,8 @@ worlds.teams = [
   { name: 'H2K', acro: 'H2K', region: 'EU', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/h2k-809eyzf8.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 2, group: 'C', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/h2k' },
   { name: 'Origen', acro: 'OG', region: 'EU', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/origen-2wse5ns8.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 3, group: 'D', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/origen' },
   // LMS
-  { name: 'ahq e-Sports Club', acro: 'ahq', region: 'LMS', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/ahq-e-sports-club-psgajhm.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 1, group: 'B', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/ahq-e-sports-club' },
-  { name: 'Yoe Flash Wolves', acro: 'Yoe', region: 'LMS', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/flash-wolves-3jsj2wjv.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 2, group: 'A', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/flash-wolves' },
+  { name: 'ahq e-Sports Club', acro: 'AHQ', region: 'LMS', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/ahq-e-sports-club-psgajhm.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 1, group: 'B', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/ahq-e-sports-club' },
+  { name: 'Yoe Flash Wolves', acro: 'YOE', region: 'LMS', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/flash-wolves-3jsj2wjv.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 2, group: 'A', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/flash-wolves' },
   // LCK
   { name: 'KOO Tigers', acro: 'KOO', region: 'LCK', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/koo-tigers-aue0bwue.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 3, group: 'A', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/koo-tigers' },
   { name: 'KT Rolster', acro: 'KT', region: 'LCK', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/kt-rolster-6572jk8v.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 2, group: 'D', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/kt-rolster' },
@@ -28,9 +33,74 @@ worlds.teams = [
   { name: 'Pain Gaming', acro: 'PG', region: 'WLD', logo: 'http://am.leagueoflegends.com/image/?f=http://assets.lolesports.com/team/pain-gaming-2wk5hx3u.png&resize=100:100', record: { wins: 0, loses: 0 }, seed: 0, group: 'A', infourl: 'http://worlds.lolesports.com/en_US/worlds/teams/pain-gaming' }
 ];
 
+// for knockout stage
+worlds.ko = {};
+worlds.ko.qfinal = [];
+worlds.ko.sfinal = [];
+worlds.ko.gfinal = [];
 
+// add teams to KO stage by
+// seeds : 1, 8, 4, 5, 2, 7, 3, 6
+function addTeamToStage(acro, stage, seed) {
+  var team = _.clone(worlds.teams[_.findIndex(worlds.teams, { acro: acro })]);
+  team.koseed = seed;
+  team.knockoutStage = {
+    record: { w: 0, l: 0 },
+    qfinal:true,
+    sfinal:false,
+    gfinal:false
+  };
+  worlds.ko[stage].push(team);
+}
+
+// double elimination bracket according to lcs.bracket
+addTeamToStage('YOE', 'qfinal', 1);
+addTeamToStage('FNC', 'qfinal', 2);
+addTeamToStage('KT', 'qfinal', 3);
+addTeamToStage('SKT', 'qfinal', 4);
+addTeamToStage('AHQ', 'qfinal', 5);
+addTeamToStage('KOO', 'qfinal', 6);
+addTeamToStage('EDG', 'qfinal', 7);
+addTeamToStage('OG', 'qfinal', 8);
+
+console.log(worlds.ko.qfinal)
+
+function playGame(t1id, t2id, outcome, victorid) {
+  // tXs is team1 seed & team2 seed
+  // outcome = { x: 3, y: 1 };
+  var team1 = worlds.ko.qfinal[_.findIndex(worlds.ko.qfinal, { koseed: t1id })];
+  var team2 = worlds.ko.qfinal[_.findIndex(worlds.ko.qfinal, { koseed: t2id })];
+  console.log(team1, team2);
+
+  if (victorid === t1id) {
+    team1.knockoutStage.record.w += outcome.w;
+    team1.knockoutStage.record.l += outcome.l;
+    team2.knockoutStage.record.w += outcome.l;
+    team2.knockoutStage.record.l += outcome.w;
+  }
+  else if (victorid === t2id) {
+    team2.knockoutStage.record.w += outcome.w;
+    team2.knockoutStage.record.l += outcome.l;
+    team1.knockoutStage.record.w += outcome.l;
+    team1.knockoutStage.record.l += outcome.w;
+  }
+  else {
+    console.log('something went wrong');
+  }
+
+}
+
+playGame(1, 8, { w: 3, l: 1 }, 8);
+console.log(worlds.ko.qfinal)
+
+// SEMIFINAL GAME1
+
+
+
+
+// set groups and call appendHTML
 worlds.init = function() {
-  // set groups
+
   for (var i in worlds.teams) {
     var team = worlds.teams[i];
     if (team.group == 'A') { worlds.groupa.push(team); }
@@ -84,11 +154,7 @@ worlds.appendHTML = function() {
     }
     h+='</div>';
     h+='</div>';
-
     mainHtml+=h;
-
   }
-
   groups.append(mainHtml);
-
 }
