@@ -98,6 +98,9 @@ var sfinal = _.filter(worlds.ko.qfinal, function(team) {
   return team.knockoutStage.sfinal == true;
 });
 
+console.log(worlds.ko.qfinal);
+console.log(sfinal);
+
 
 // SEMIFINALS ( implement sat/sun )
 worlds.ko.sfinal = sfinal;
@@ -137,14 +140,18 @@ worlds.setTabsClickEv = function() {
     e.preventDefault();
     var tabName = $(this).data('tab');
 
+    $(this).addClass('active');
+
     if (tabName === 'groups' && worlds.currentTab != tabName) {
       worlds.currentTab = tabName;
+      $('.knockout-stg').removeClass('active');
       $('.knockouts').hide();
       $('.groups').show();
     }
     else if (tabName === 'knockouts' && worlds.currentTab != tabName) {
       worlds.currentTab = tabName;
       console.log('ko\'s clicked!');
+      $('.group-stg').removeClass('active');
       $('.groups').hide();
       $('.knockouts').show();
     }
@@ -158,8 +165,12 @@ worlds.setTabsClickEv = function() {
 
 worlds.appendKOStageHTML = function() {
   var kos = $('.knockouts');
-  kos.append('<h2>hello knockouts</h2>');
-  console.log('should append kos')
+  // kos.append('<h2>hello knockouts</h2>');
+  console.log('should append kos');
+
+  // take worlds.ko.qfinal and make it so 1seed vs 8seed...
+
+  // take worlds.ko.sfinal and make it so 1seed vs 8seed...
 }
 
 worlds.appendGroupStageHTML = function() {

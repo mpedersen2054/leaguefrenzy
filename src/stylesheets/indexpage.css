@@ -163,3 +163,55 @@
 .tabs .knockout-stg {
   display: inline-block;
 }
+
+.tabs .group-stg.active,
+.tabs .knockout-stg.active {
+  color: #000;
+  font-weight: 600;
+}
+
+
+.final {
+  padding: 40px 0;
+  border-bottom: 2px solid #eee;
+}
+
+.final:last-child {
+  border-bottom: none;
+}
+
+.final h3 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.knockouts {}
+
+.quarter-finals {}
+
+.final .match {
+  padding: 10px;
+}
+
+.final .team .icon {
+  min-width: 100px;
+}
+
+.final .team .name {
+  color: #666;
+  font-size: 14px;
+}
+
+.final .versus {
+  color: #555;
+  font-size: 1.4em;
+  font-weight: 400;
+  text-align: center;
+}
+
+
+
+.grand-finals .col-lg-3 {
+  position: relative;
+  right: 30px;
+}
