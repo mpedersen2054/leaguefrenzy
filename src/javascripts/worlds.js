@@ -35,85 +35,88 @@ worlds.teams = [
 ];
 
 // for knockout stage
-worlds.ko = {};
-worlds.ko.qfinal = [];
-worlds.ko.sfinal = [];
-worlds.ko.gfinal = [];
 
 // add teams to KO stage & clone & add properties
 // seeds : 1 vs 8, 4 vs 5, 2 vs 7, 3 vs 6
-function addTeamToKnockout(acro, seed) {
-  var team = _.clone(worlds.teams[_.findIndex(worlds.teams, { acro: acro })]);
-  team.koseed = seed;
-  team.knockoutStage = {
-    record: { w: 0, l: 0 },
-    qfinal:true ,
-    sfinal:false,
-    gfinal:false
-  };
-  worlds.ko.qfinal.push(team);
-}
 
-// double elimination bracket according to lcs.bracket
-addTeamToKnockout('YOE', 1);
-addTeamToKnockout('FNC', 2);
-addTeamToKnockout('KT' , 3);
-addTeamToKnockout('SKT', 4);
-addTeamToKnockout('AHQ', 5);
-addTeamToKnockout('KOO', 6);
-addTeamToKnockout('EDG', 7);
-addTeamToKnockout('OG' , 8);
+worlds.ko = {
+  qfinal: [],
+  sfinal: [],
+  gfinal: [],
+  init: function() {
+    this.addTeamToKnockout('YOE', 1);
+    this.addTeamToKnockout('FNC', 2);
+    this.addTeamToKnockout('KT' , 3);
+    this.addTeamToKnockout('SKT', 4);
+    this.addTeamToKnockout('AHQ', 5);
+    this.addTeamToKnockout('KOO', 6);
+    this.addTeamToKnockout('EDG', 7);
+    this.addTeamToKnockout('OG' , 8);
+  },
 
-function playGame(t1seed, t2seed, outcome, victorid, nextStage, thisStage) {
-  // tXs is team1 seed & team2 seed
-  // outcome = { x: 3, y: 1 };
-  var team1 = worlds.ko.qfinal[_.findIndex(worlds.ko.qfinal, { koseed: t1seed })];
-  var team2 = worlds.ko.qfinal[_.findIndex(worlds.ko.qfinal, { koseed: t2seed })];
+  addTeamToKnockout: function(acro, seed) {
+    var self = this;
+    var team = _.clone(worlds.teams[_.findIndex(worlds.teams, { acro: acro })]);
+    team.koseed = seed;
+    team.knockoutStage = {
+      record: { w: 0, l: 0 },
+      qfinal:true ,
+      sfinal:false,
+      gfinal:false
+    };
+    self.qfinal.push(team);
+  },
 
-  if (victorid === t1seed) {
-    team1.knockoutStage.record.w += outcome.w;
-    team1.knockoutStage.record.l += outcome.l;
-    team2.knockoutStage.record.w += outcome.l;
-    team2.knockoutStage.record.l += outcome.w;
-    // team1.knockoutStage[nextStage] = true;
-    team1.knockoutStage[thisStage] = { w: outcome.w, l: outcome.l }
-    worlds.ko[nextStage].push(team1);
+  playGame: function(t1seed, t2seed, outcome, victorid, nextStage, thisStage) {
+    // tXs is team1 seed & team2 seed
+    // outcome = { x: 3, y: 1 };
+    var self = this;
+    var team1 = self.qfinal[_.findIndex(self.qfinal, { koseed: t1seed })];
+    var team2 = self.qfinal[_.findIndex(self.qfinal, { koseed: t2seed })];
+
+    if (victorid === t1seed) {
+      team1.knockoutStage.record.w += outcome.w;
+      team1.knockoutStage.record.l += outcome.l;
+      team2.knockoutStage.record.w += outcome.l;
+      team2.knockoutStage.record.l += outcome.w;
+      // team1.knockoutStage[nextStage] = true;
+      team1.knockoutStage[thisStage] = { w: outcome.w, l: outcome.l }
+      worlds.ko[nextStage].push(team1);
+    }
+    else if (victorid === t2seed) {
+      team2.knockoutStage.record.w += outcome.w;
+      team2.knockoutStage.record.l += outcome.l;
+      team1.knockoutStage.record.w += outcome.l;
+      team1.knockoutStage.record.l += outcome.w;
+      // team2.knockoutStage[nextStage] = true;
+      team2.knockoutStage[thisStage] = { w: outcome.w, l: outcome.l }
+
+      self[nextStage].push(team2);
+    }
+    else {
+      console.log('something went wrong');
+    }
+  },
+
+  playQFinal: function() {
+    var self = this;
+    self.playGame(1, 8, { w: 3, l: 1 }, 8, 'sfinal', 'qfinal');
+    self.playGame(4, 5, { w: 3, l: 0 }, 4, 'sfinal', 'qfinal');
+    self.playGame(2, 7, { w: 3, l: 0 }, 2, 'sfinal', 'qfinal');
+    self.playGame(3, 6, { w: 3, l: 1 }, 6, 'sfinal', 'qfinal');
+  },
+
+  playSFinal: function() {
+    var self = this;
+    self.playGame(8, 4, { w: 3, l: 0 }, 4, 'gfinal', 'sfinal');
+    self.playGame(2, 6, { w: 3, l: 0 }, 6, 'gfinal', 'sfinal');
+  },
+
+  playGFinal: function() {
+    console.log('hello playGFinal...')
   }
-  else if (victorid === t2seed) {
-    team2.knockoutStage.record.w += outcome.w;
-    team2.knockoutStage.record.l += outcome.l;
-    team1.knockoutStage.record.w += outcome.l;
-    team1.knockoutStage.record.l += outcome.w;
-    // team2.knockoutStage[nextStage] = true;
-    team2.knockoutStage[thisStage] = { w: outcome.w, l: outcome.l }
 
-    worlds.ko[nextStage].push(team2);
-  }
-  else {
-    console.log('something went wrong');
-  }
-}
-
-// QUARTERFINALS
-// seeds : 1 vs 8, 4 vs 5, 2 vs 7, 3 vs 6
-
-function playQFinal() {
-  playGame(1, 8, { w: 3, l: 1 }, 8, 'sfinal', 'qfinal');
-  playGame(4, 5, { w: 3, l: 0 }, 4, 'sfinal', 'qfinal');
-  playGame(2, 7, { w: 3, l: 0 }, 2, 'sfinal', 'qfinal');
-  playGame(3, 6, { w: 3, l: 1 }, 6, 'sfinal', 'qfinal');
-}
-// filter only teams whose sfinal = true
-
-function playSFinal() {
-  playGame(8, 4, { w: 3, l: 0 }, 4, 'gfinal', 'sfinal');
-  playGame(2, 6, { w: 3, l: 0 }, 6, 'gfinal', 'sfinal');
-}
-
-function playGFinal() {
-  // body...
-}
-
+};
 
 
 // SEMIFINALS ( implement sat/sun )
@@ -141,6 +144,7 @@ worlds.init = function() {
   // show groupstage initially
   $('.groups').show();
 
+  worlds.ko.init();
   worlds.setTabsClickEv();
   worlds.appendKOStageHTML();
   worlds.appendGroupStageHTML();
@@ -191,7 +195,7 @@ worlds.appendKOStageHTML = function() {
     var h = '';
 
     // adds w/l for all teams and sfinal:true
-    playQFinal();
+    worlds.ko.playQFinal();
 
     // push teams into correct matches
     // then all into qfinals[]
@@ -261,7 +265,7 @@ worlds.appendKOStageHTML = function() {
     var m1=[], m2=[];
     var h = '';
 
-    playSFinal();
+    worlds.ko.playSFinal();
 
     m1.push(worlds.ko.sfinal[0], worlds.ko.sfinal[1]);
     m2.push(worlds.ko.sfinal[2], worlds.ko.sfinal[3]);
@@ -323,7 +327,7 @@ worlds.appendKOStageHTML = function() {
 
   function appendGFinal() {
     console.log('hello appendGFinal');
-    playGFinal();
+    worlds.ko.playGFinal();
   }
 
 }
