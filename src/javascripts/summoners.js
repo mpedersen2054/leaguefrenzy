@@ -1,3 +1,7 @@
+// for some reason, it will only append the summoner data
+// when the var is assigned outside of the summoners scope,
+// its being used in 2 places: summoners.submitSummoner, summoners.appendHTML
+var sumListArea = $('.summoner-list-area');
 
 var summoners = summoners || {
 
@@ -8,7 +12,6 @@ var summoners = summoners || {
 
   init: function() {
     var self = this;
-    self.sumListArea = $('.summoner-list-area');
 
     self.submitSummoner();
   },
@@ -21,7 +24,7 @@ var summoners = summoners || {
     // remove the container for the spinner
     // and the list area when page first visited
     spinnerCont.detach();
-    self.self.sumListArea.detach();
+    sumListArea.detach();
 
     sumsearch.on('submit', function(e) {
       e.preventDefault();
@@ -33,12 +36,6 @@ var summoners = summoners || {
       $('.meta').remove();
       $('.ranked-champs').remove();
       $('#summoners-page .fluid-container').append(spinnerCont);
-
-      // gatherSummonerData callback function
-      gatherSummonerData({sum: sumName, url: url}, function(err, data) {
-        if (err) { return handleNoSum(err, sumName) }
-        if (!err && data) { return handleFoundSum(data) }
-      });
 
       var handleNoSum = function(err, sn) {
         console.log(sn);
@@ -57,10 +54,16 @@ var summoners = summoners || {
         input.val('');
       }
 
+      // gatherSummonerData callback function
+      gatherSummonerData({sum: sumName, url: url}, function(err, data) {
+        if (err) { return handleNoSum(err, sumName) }
+        if (!err && data) { return handleFoundSum(data) }
+      });
+
     })
   },
 
-  getUri = function(name) {
+  getUri: function(name) {
     function getEndpoint(region, type, inp) {
       if (type === 0) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + inp +'?api_key=' + summoners._apiKey;
       else if (type === 1) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.3/stats/by-summoner/' + inp + '/ranked/' +'?api_key=' + summoners._apiKey;
@@ -77,6 +80,8 @@ var summoners = summoners || {
 }
 
 // get different info and use callback for when all info is collected
+// hit 3 different api endpoints:
+// general, rankedChamps(method for formatting the data too), rankedStats
 var gatherSummonerData = function(options, callback) {
 
   if (typeof options != 'object') { callback('no options object', null) }
@@ -153,7 +158,6 @@ var gatherSummonerData = function(options, callback) {
     self.getRankedStats(s);
   }
 
-
   this.getRankedStats = function(data) {
     var s = data;
     var url = summoners.getUri().league(s.id);
@@ -185,7 +189,7 @@ var gatherSummonerData = function(options, callback) {
 summoners.appendHTML = function(data) {
   var rankedStats = data.rankedStats;
   var rankedCh = data.rankedChamps;
-  // after all done, append html string to self.sumlistarea
+  // after all done, append html string to sumlistarea
   var html = '';
 
   // meta
@@ -265,10 +269,9 @@ summoners.appendHTML = function(data) {
   html+= '</div>'
   html+='</div>'
 
-
-  self.sumListArea.append(html);
+  sumListArea.append(html);
   $('.extra-data').hide();
-  $('#summoners-page .fluid-container').append(self.sumListArea);
+  $('#summoners-page .fluid-container').append(sumListArea);
   this.searchRankedChamp();
 
 }
@@ -293,6 +296,8 @@ summoners.searchRankedChamp = function() {
   this.rankedChampMoreInfo();
 }
 
+// when ( v more info ) clicked slide down
+// champs specific stats
 summoners.rankedChampMoreInfo = function() {
   var moreInfo = $('.more-info');
   moreInfo.bind('click', function(e) {
