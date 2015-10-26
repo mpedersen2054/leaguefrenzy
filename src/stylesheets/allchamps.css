@@ -17,6 +17,9 @@
 
 #champions-page .champ img {
   border-radius: 0.33333em;
+  min-width: 138px;
+  min-height: 138px;
+  background: url('http://www.kindermorgan.com/images/loading.gif') no-repeat center;
 }
 
 #champions-page .champ a:hover {

@@ -27,6 +27,10 @@
     position: relative;
     right: 0;
   }
+
+  .final .match {
+    margin-bottom: 40px;
+  }
 }
 
 /*medium*/

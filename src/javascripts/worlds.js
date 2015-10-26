@@ -110,6 +110,9 @@ function playSFinal() {
   playGame(2, 6, { w: 3, l: 0 }, 6, 'gfinal', 'sfinal');
 }
 
+function playGFinal() {
+  // body...
+}
 
 
 
@@ -177,12 +180,10 @@ worlds.setTabsClickEv = function() {
 
 worlds.appendKOStageHTML = function() {
   var kos = $('.knockouts');
-  // kos.append('<h2>hello knockouts</h2>');
-  console.log('should append kos');
 
   appendQFinal();
   appendSFinal();
-
+  appendGFinal();
 
   function appendQFinal() {
     var m1=[], m2=[], m3=[], m4=[], w=worlds.ko.qfinal;
@@ -301,8 +302,6 @@ worlds.appendKOStageHTML = function() {
       html+='<div class="name">'+t2.acro+'</div>'
       html+='</div>'
 
-
-
       html+='<div class="winner">'
       html+='W: <span class="wteam">'+winner.acro+'</span>'
       html+='<div class="vicdef">'
@@ -319,7 +318,12 @@ worlds.appendKOStageHTML = function() {
     h+='</div>'
     h+='</div>'
 
-    kos.append(h);
+    kos.find('.quarter-finals').after(h);
+  }
+
+  function appendGFinal() {
+    console.log('hello appendGFinal');
+    playGFinal();
   }
 
 }
@@ -334,7 +338,7 @@ worlds.appendGroupStageHTML = function() {
     var h = '';
 
     h+='<div class="group">';
-    h+='<h4>Group '+grpname+'</h4>';
+    h+='<h3>Group '+grpname+'</h3>';
     h+='<div class="row">';
     // each team in grp
     for (var i in grp) {
