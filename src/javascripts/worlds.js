@@ -1,13 +1,17 @@
 
-var worlds = worlds || {};
-worlds.allGroups = [];
-worlds.currentTab = 'group';
+var worlds = worlds || {
 
-// for group stage
-// first element of each array is the group letter
-// group : [ 'a', { ... }, { ... }, { ... }, { ... } ]
-worlds.groupa = ['a']; worlds.groupb = ['b'];
-worlds.groupc = ['c']; worlds.groupd = ['d'];
+  // for group stage
+  // first element of each array is the group letter
+  // group : [ 'a', { ... }, { ... }, { ... }, { ... } ]
+  groupa: ['a'],
+  groupb: ['b'],
+  groupc: ['c'],
+  groupd: ['d'],
+  allGroups: [],
+  // index starts on group tab
+  currentTab: 'group'
+};
 
 worlds.teams = [
   // NA
@@ -58,8 +62,8 @@ worlds.init = function() {
 };
 
 
-// data / data-manipulation functions
-// for the knockout stage
+// all props/methods relating to
+// the knockout stage
 worlds.ko = {
   qfinal: [],
   sfinal: [],
@@ -247,14 +251,13 @@ worlds.createFrontend = function() {
       for (var i in qfinals) {
         var match = qfinals[i];
         var t1 = match[0], t2 = match[1];
-        var winner;
         var t1wins = t1.knockoutStage.record.w;
         var t2wins = t2.knockoutStage.record.w;
-        winner = (t1wins > t2wins) ? t1 : t2;
+        var winner = (t1wins > t2wins) ? t1 : t2;
         var winnerwins = winner.knockoutStage.record.w;
         var winnerloses = winner.knockoutStage.record.l;
-        var html = '';
 
+        var html = '';
         html+='<div class="col-lg-3 col-sm-6 col-xs-6">'
         html+='<div class="match">'
         html+='<div class="team">'
@@ -270,8 +273,6 @@ worlds.createFrontend = function() {
         html+='</div>'
         html+='<div class="name">'+t2.acro+'</div>'
         html+='</div>'
-
-
 
         html+='<div class="winner">'
         html+='W: <span class="wteam">'+winner.acro+'</span>'
@@ -303,8 +304,6 @@ worlds.createFrontend = function() {
       m2.push(worlds.ko.sfinal[2], worlds.ko.sfinal[3]);
       sfinals.push(m1, m2);
 
-      console.log(sfinals);
-
       h+='<div class="semi-finals final">'
       h+='<h3>Semi Finals</h3>'
       h+='<div class="row">'
@@ -313,10 +312,9 @@ worlds.createFrontend = function() {
       for (var i in sfinals) {
         var match = sfinals[i];
         var t1 = match[0], t2 = match[1];
-        var winner;
         var t1wins = t1.knockoutStage.record.w;
         var t2wins = t2.knockoutStage.record.w;
-        winner = (t1wins > t2wins) ? t1 : t2;
+        var winner = (t1wins > t2wins) ? t1 : t2;
         var winnerwins  = winner.knockoutStage.sfinal.w;
         var winnerloses = winner.knockoutStage.sfinal.l;
 
