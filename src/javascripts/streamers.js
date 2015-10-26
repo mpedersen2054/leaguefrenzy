@@ -39,6 +39,7 @@ streamers.init = function(path) {
 }
 
 streamers.appendTop15 = function() {
+  console.log('hello streamers top')
   var fift = streamers.topStreamers.slice(0, 15);
   var html = '';
 
@@ -60,7 +61,7 @@ streamers.appendTop15 = function() {
 
   html+='<a href="/streamers" class="btn btn-xs btn-success more-streamers">more</a>';
   $('.spinner').detach();
-  $('.stream-header').after(html);
+  strHeader.after(html);
 }
 
 

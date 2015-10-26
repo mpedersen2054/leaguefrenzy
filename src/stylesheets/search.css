@@ -17,10 +17,16 @@
   width: 29em;
   font-size: 15px;
   font-weight: 300;
-  border-radius: 2px;
+  border-radius: 6px;
   padding: 10px 0;
   text-indent: 10px;
   outline: none;
+  border: 2px solid #bbb;
+}
+
+#champ-filter,
+#summoner-filter:focus {
+  border: 2px solid #18bc9c;
 }
 
 .search { position: relative; }
