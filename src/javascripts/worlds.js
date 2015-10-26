@@ -37,6 +37,8 @@ worlds.teams = [
 // for knockout stage
 worlds.ko = {};
 worlds.ko.qfinal = [];
+worlds.ko.sfinal = [];
+worlds.ko.gfinal = [];
 
 // add teams to KO stage & clone & add properties
 // seeds : 1 vs 8, 4 vs 5, 2 vs 7, 3 vs 6
@@ -62,7 +64,7 @@ addTeamToKnockout('KOO', 6);
 addTeamToKnockout('EDG', 7);
 addTeamToKnockout('OG' , 8);
 
-function playGame(t1seed, t2seed, outcome, victorid, nextStage) {
+function playGame(t1seed, t2seed, outcome, victorid, nextStage, thisStage) {
   // tXs is team1 seed & team2 seed
   // outcome = { x: 3, y: 1 };
   var team1 = worlds.ko.qfinal[_.findIndex(worlds.ko.qfinal, { koseed: t1seed })];
@@ -73,14 +75,19 @@ function playGame(t1seed, t2seed, outcome, victorid, nextStage) {
     team1.knockoutStage.record.l += outcome.l;
     team2.knockoutStage.record.w += outcome.l;
     team2.knockoutStage.record.l += outcome.w;
-    team1.knockoutStage[nextStage] = true;
+    // team1.knockoutStage[nextStage] = true;
+    team1.knockoutStage[thisStage] = { w: outcome.w, l: outcome.l }
+    worlds.ko[nextStage].push(team1);
   }
   else if (victorid === t2seed) {
     team2.knockoutStage.record.w += outcome.w;
     team2.knockoutStage.record.l += outcome.l;
     team1.knockoutStage.record.w += outcome.l;
     team1.knockoutStage.record.l += outcome.w;
-    team2.knockoutStage[nextStage] = true;
+    // team2.knockoutStage[nextStage] = true;
+    team2.knockoutStage[thisStage] = { w: outcome.w, l: outcome.l }
+
+    worlds.ko[nextStage].push(team2);
   }
   else {
     console.log('something went wrong');
@@ -89,21 +96,25 @@ function playGame(t1seed, t2seed, outcome, victorid, nextStage) {
 
 // QUARTERFINALS
 // seeds : 1 vs 8, 4 vs 5, 2 vs 7, 3 vs 6
-playGame(1, 8, { w: 3, l: 1 }, 8, 'sfinal');
-playGame(4, 5, { w: 3, l: 0 }, 4, 'sfinal');
-playGame(2, 7, { w: 3, l: 0 }, 2, 'sfinal');
-playGame(3, 6, { w: 3, l: 1 }, 6, 'sfinal');
-// filter only teams whose sfinal = true
-var sfinal = _.filter(worlds.ko.qfinal, function(team) {
-  return team.knockoutStage.sfinal == true;
-});
 
-console.log(worlds.ko.qfinal);
-console.log(sfinal);
+function playQFinal() {
+  playGame(1, 8, { w: 3, l: 1 }, 8, 'sfinal', 'qfinal');
+  playGame(4, 5, { w: 3, l: 0 }, 4, 'sfinal', 'qfinal');
+  playGame(2, 7, { w: 3, l: 0 }, 2, 'sfinal', 'qfinal');
+  playGame(3, 6, { w: 3, l: 1 }, 6, 'sfinal', 'qfinal');
+}
+// filter only teams whose sfinal = true
+
+function playSFinal() {
+  playGame(8, 4, { w: 3, l: 0 }, 4, 'gfinal', 'sfinal');
+  playGame(2, 6, { w: 3, l: 0 }, 6, 'gfinal', 'sfinal');
+}
+
+
 
 
 // SEMIFINALS ( implement sat/sun )
-worlds.ko.sfinal = sfinal;
+// worlds.ko.sfinal = sfinal;
 // playGame(1, 8, { w: 3, l: 1 }, 8, 'sfinal');
 // playGame(1, 8, { w: 3, l: 1 }, 8, 'sfinal');
 
@@ -163,14 +174,154 @@ worlds.setTabsClickEv = function() {
   });
 }
 
+
 worlds.appendKOStageHTML = function() {
   var kos = $('.knockouts');
   // kos.append('<h2>hello knockouts</h2>');
   console.log('should append kos');
 
-  // take worlds.ko.qfinal and make it so 1seed vs 8seed...
+  appendQFinal();
+  appendSFinal();
 
-  // take worlds.ko.sfinal and make it so 1seed vs 8seed...
+
+  function appendQFinal() {
+    var m1=[], m2=[], m3=[], m4=[], w=worlds.ko.qfinal;
+    var qfinals = [];
+    var h = '';
+
+    // adds w/l for all teams and sfinal:true
+    playQFinal();
+
+    // push teams into correct matches
+    // then all into qfinals[]
+    // [ [], [], [], [] ]
+    m1.push(w[0], w[7]);
+    m2.push(w[3], w[4]);
+    m3.push(w[1], w[6]);
+    m4.push(w[2], w[5]);
+    qfinals.push(m1, m2, m3, m4);
+
+    h+='<div class="quarter-finals final">'
+    h+='<h3>Quarter Finals</h3>'
+    h+='<div class="row">'
+
+
+    // take each match in qfinals
+    for (var i in qfinals) {
+      var match = qfinals[i];
+      var t1 = match[0], t2 = match[1];
+      var winner;
+      var t1wins = t1.knockoutStage.record.w;
+      var t2wins = t2.knockoutStage.record.w;
+      winner = (t1wins > t2wins) ? t1 : t2;
+      var winnerwins = winner.knockoutStage.record.w;
+      var winnerloses = winner.knockoutStage.record.l;
+      var html = '';
+
+      html+='<div class="col-lg-3 col-sm-6 col-xs-6">'
+      html+='<div class="match">'
+      html+='<div class="team">'
+      html+='<div class="icon">'
+      html+='<img src="'+t1.logo+'" alt="">'
+      html+='</div>'
+      html+='<div class="name">'+t1.acro+'</div>'
+      html+='</div>'
+      html+='<div class="versus">VS</div>'
+      html+='<div class="team">'
+      html+='<div class="icon">'
+      html+='<img src="'+t2.logo+'" alt="">'
+      html+='</div>'
+      html+='<div class="name">'+t2.acro+'</div>'
+      html+='</div>'
+
+
+
+      html+='<div class="winner">'
+      html+='W: <span class="wteam">'+winner.acro+'</span>'
+      html+='<div class="vicdef">'
+      html+='<span class="w">'+winnerwins+'</span> - <span class="l">'+winnerloses+'</span>'
+      html+='</div>'
+      html+='</div>'
+
+      html+='</div>'
+      html+='</div>'
+
+      h+=html;
+    }
+
+    h+='</div>'
+    h+='</div>'
+
+    kos.prepend(h);
+  }
+
+  function appendSFinal() {
+    var sfinals = [];
+    var m1=[], m2=[];
+    var h = '';
+
+    playSFinal();
+
+    m1.push(worlds.ko.sfinal[0], worlds.ko.sfinal[1]);
+    m2.push(worlds.ko.sfinal[2], worlds.ko.sfinal[3]);
+    sfinals.push(m1, m2);
+
+    console.log(sfinals);
+
+    h+='<div class="semi-finals final">'
+    h+='<h3>Semi Finals</h3>'
+    h+='<div class="row">'
+
+    h+='<div class="col-lg-3"></div>'
+
+    for (var i in sfinals) {
+      var match = sfinals[i];
+      var t1 = match[0], t2 = match[1];
+      var winner;
+      var t1wins = t1.knockoutStage.record.w;
+      var t2wins = t2.knockoutStage.record.w;
+      winner = (t1wins > t2wins) ? t1 : t2;
+      var winnerwins  = winner.knockoutStage.sfinal.w;
+      var winnerloses = winner.knockoutStage.sfinal.l;
+
+      var html = ''
+      html+='<div class="col-lg-3 col-sm-6 col-xs-6">'
+      html+='<div class="match">'
+      html+='<div class="team">'
+      html+='<div class="icon">'
+      html+='<img src="'+t1.logo+'" alt="">'
+      html+='</div>'
+      html+='<div class="name">'+t1.acro+'</div>'
+      html+='</div>'
+      html+='<div class="versus">VS</div>'
+      html+='<div class="team">'
+      html+='<div class="icon">'
+      html+='<img src="'+t2.logo+'" alt="">'
+      html+='</div>'
+      html+='<div class="name">'+t2.acro+'</div>'
+      html+='</div>'
+
+
+
+      html+='<div class="winner">'
+      html+='W: <span class="wteam">'+winner.acro+'</span>'
+      html+='<div class="vicdef">'
+      html+='<span class="w">'+winnerwins+'</span> - <span class="l">'+winnerloses+'</span>'
+      html+='</div>'
+      html+='</div>'
+
+      html+='</div>'
+      html+='</div>'
+
+      h+=html;
+    }
+
+    h+='</div>'
+    h+='</div>'
+
+    kos.append(h);
+  }
+
 }
 
 worlds.appendGroupStageHTML = function() {

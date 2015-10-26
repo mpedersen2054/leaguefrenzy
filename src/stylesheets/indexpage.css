@@ -111,7 +111,7 @@
 .groups .team-block {
   padding: 0.3em 1em;
   border: 1px solid #eee;
-  background-color: #efefef;;
+  background-color: #efefef;
   border-radius: 4px;
   color: #444;
   text-decoration: none;
@@ -176,6 +176,10 @@
   border-bottom: 2px solid #eee;
 }
 
+.final:first-child {
+  padding-top: 10px;
+}
+
 .final:last-child {
   border-bottom: none;
 }
@@ -191,6 +195,20 @@
 
 .final .match {
   padding: 10px;
+  background-color: #efefef;
+}
+
+.final .team {
+  padding: 10px 5px;
+  border: 1px solid #eee;
+  background-color: #999;
+  border-radius: 4px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.final .team .won {
+  background-color: red;
 }
 
 .final .team .icon {
@@ -198,8 +216,8 @@
 }
 
 .final .team .name {
-  color: #666;
   font-size: 14px;
+  text-align: center;
 }
 
 .final .versus {
@@ -207,8 +225,18 @@
   font-size: 1.4em;
   font-weight: 400;
   text-align: center;
+  margin: 10px 0;
 }
 
+.match .winner {
+  text-align: center;
+  font-size: 0.9em;
+  margin-top: 30px;
+  background-color: #999;
+  color: #ddd;
+  padding: 5px;
+  border-radius: 6px;
+}
 
 
 .grand-finals .col-lg-3 {
