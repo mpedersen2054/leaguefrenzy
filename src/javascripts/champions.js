@@ -1,7 +1,7 @@
 var champs = {};
 champs._currentVotes = [];
 
-
+// initiates all 6 functions defined on champs{}
 champs.init = function() {
   this.champTips();
   this.showBattleData();
@@ -11,6 +11,7 @@ champs.init = function() {
   this.vote();
 }
 
+// handles the click event of ally/enemy tips
 champs.champTips = function() {
   var tst = $('.toggle-tips');
   var enemyTipsUl = $('.enemy-tips ul');
@@ -30,6 +31,7 @@ champs.champTips = function() {
   })
 }
 
+// shows the attk, def, magic ... stats on click
 champs.showBattleData = function() {
   var moreInfo = $('.battle-data-button .more-info');
   var lessInfo = $('.battle-data-button .less-info');
@@ -51,6 +53,8 @@ champs.showBattleData = function() {
   });
 }
 
+// only show champs whose name roughly matches
+// whats typed in the input field
 champs.searchChampion = function() {
   var cfilter = $('#champ-filter');
   var champpa = $('.champ').parent();
@@ -67,6 +71,7 @@ champs.searchChampion = function() {
   });
 }
 
+// probably should remove this
 champs.spellHover = function() {
   var spells = $('.champ-spells .spell');
   var spellImage = $('.champ-spells .spell img');
@@ -98,10 +103,20 @@ champs.showTenCounters = function() {
   var showMoreGood = $('.good-against .more-champs');
   var showLessGood = $('.good-against .less-champs');
 
+  // only show the 1-10, hide the 11-20
+  // show the ( v more ) hide the ( ^ less )
   showLessBad.hide();
   showLessGood.hide();
   tenBadii.hide();
   tenGoodii.hide();
+
+  // functions defined below
+  // binds rollout when only 10
+  // binds rollback when more than 10
+  showMoreEvent(showMoreBad);
+  showMoreEvent(showMoreGood);
+  showLessEvent(showLessBad);
+  showLessEvent(showLessGood);
 
   function showMoreEvent(x) {
     return x.bind('click', function() {
@@ -140,11 +155,6 @@ champs.showTenCounters = function() {
       return false;
     })
   }
-
-  showMoreEvent(showMoreBad);
-  showMoreEvent(showMoreGood);
-  showLessEvent(showLessBad);
-  showLessEvent(showLessGood);
 }
 
 champs.vote = function() {
@@ -161,13 +171,14 @@ champs.vote = function() {
     var data   = { lc: lcname, gorb: gorb, c: cname };
     var unid   = lcname+gorb+cname+uord;
 
-    console.log(unid, uord, champs._currentVotes);
+    // console.log(unid, uord, champs._currentVotes);
 
     // if unique string isnt in champs._currentVotes
     // therefor it hasnt been clicked this page load
     if (champs._currentVotes.indexOf(unid) === -1) {
       champs._currentVotes.push(unid);
 
+      // update in frontend
       var countToNum = +count.text();
       countToNum++;
       count.text(countToNum.toString());
@@ -178,6 +189,7 @@ champs.vote = function() {
     return false;
   })
 
+  // send request to server
   function castVote(uord, data) {
     $.ajax({
       url: '/'+uord, // /upvote, /downvote
