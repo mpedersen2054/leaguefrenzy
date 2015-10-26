@@ -1,66 +1,79 @@
-var summoners = {};
-summoners._apiKey = 'a85d0753-6824-4725-a76f-23be84110e08';
-summoners._prevSearches = [];
-summoners._searchDone = false;
-summoners._currentSearch;
-summoners._staticChamps = sc || {};
 
+var summoners = summoners || {
 
-var sumsearch = $('#summoner-form');
-var input = $('#summoner-filter');
-var spinnerCont = $('.spinner-container'); spinnerCont.detach();
-var sumListArea = $('.summoner-list-area'); sumListArea.detach();
+  _apiKey: 'a85d0753-6824-4725-a76f-23be84110e08',
+  _prevSearches: [],
+  _searchDone: false,
+  _staticChamps: sc || {},
 
+  init: function() {
+    var self = this;
+    self.sumListArea = $('.summoner-list-area');
 
-summoners.submitSummoner = function() {
-  sumsearch.on('submit', function(e) {
-    e.preventDefault();
+    self.submitSummoner();
+  },
 
-    var sumName = input.val().replace(/\W/g, '');
-    var url = summoners.getUri(sumName).general;
+  submitSummoner: function() {
+    var sumsearch = $('#summoner-form');
+    var input = $('#summoner-filter');
+    var spinnerCont = $('.spinner-container');
 
-    spinnerCont.show();
-    $('.meta').remove();
-    $('.ranked-champs').remove();
-    $('#summoners-page .fluid-container').append(spinnerCont);
+    // remove the container for the spinner
+    // and the list area when page first visited
+    spinnerCont.detach();
+    self.self.sumListArea.detach();
 
-    // gSD callback
-    gatherSummonerData({sum: sumName, url: url}, function(err, data) {
-      if (err) { return handleNoSum(err, sumName) }
-      if (!err && data) { return handleFoundSum(data) }
-    });
-  });
-}
-var handleNoSum = function(err, sn) {
-  console.log(sn);
-  var sum = $('<span></span>').text(sn);
-  var ncf = $('<div>').addClass('no-summoner-found').text(' not found! Try again.').prepend(sum);
-  $('.search').after(ncf)
-  spinnerCont.hide();
-  input.val('');
-}
-var handleFoundSum = function(data) {
-  $('.no-summoner-found').remove();
-  spinnerCont.hide();
-  summoners.appendHTML(data);
-  summoners._prevSearches.push(input.val());
-  input.val('');
-}
+    sumsearch.on('submit', function(e) {
+      e.preventDefault();
 
+      var sumName = input.val().replace(/\W/g, '');
+      var url = summoners.getUri(sumName).general;
 
-summoners.getUri = function(name) {
-  function getEndpoint(region, type, inp) {
-    if (type === 0) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + inp +'?api_key=' + summoners._apiKey;
-    else if (type === 1) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.3/stats/by-summoner/' + inp + '/ranked/' +'?api_key=' + summoners._apiKey;
-    else if (type === 2) return 'https://' + region + '.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + inp + '/entry/' +'?api_key=' + summoners._apiKey;
-    else if (type === 3) return 'https://' + region + '.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + inp + '/entry/' +'?api_key=' + summoners._apiKey;
-    else console.log('error!');
+      spinnerCont.show();
+      $('.meta').remove();
+      $('.ranked-champs').remove();
+      $('#summoners-page .fluid-container').append(spinnerCont);
+
+      // gatherSummonerData callback function
+      gatherSummonerData({sum: sumName, url: url}, function(err, data) {
+        if (err) { return handleNoSum(err, sumName) }
+        if (!err && data) { return handleFoundSum(data) }
+      });
+
+      var handleNoSum = function(err, sn) {
+        console.log(sn);
+        var sum = $('<span></span>').text(sn);
+        var ncf = $('<div>').addClass('no-summoner-found').text(' not found! Try again.').prepend(sum);
+        $('.search').after(ncf)
+        spinnerCont.hide();
+        input.val('');
+      }
+
+      var handleFoundSum = function(data) {
+        $('.no-summoner-found').remove();
+        spinnerCont.hide();
+        summoners.appendHTML(data);
+        summoners._prevSearches.push(input.val());
+        input.val('');
+      }
+
+    })
+  },
+
+  getUri = function(name) {
+    function getEndpoint(region, type, inp) {
+      if (type === 0) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + inp +'?api_key=' + summoners._apiKey;
+      else if (type === 1) return 'https://' + region + '.api.pvp.net/api/lol/na/v1.3/stats/by-summoner/' + inp + '/ranked/' +'?api_key=' + summoners._apiKey;
+      else if (type === 2) return 'https://' + region + '.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + inp + '/entry/' +'?api_key=' + summoners._apiKey;
+      else if (type === 3) return 'https://' + region + '.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + inp + '/entry/' +'?api_key=' + summoners._apiKey;
+      else console.log('error!');
+    }
+    this.general = getEndpoint( 'na', 0, name );
+    this.champs  = function( id ) { return getEndpoint( 'na', 1, id ) }
+    this.league  = function( id ) { return getEndpoint( 'na', 2, id ) }
+    this.hello   = 'hello there';
+    return { general: this.general, champs: this.champs, league: this.league, hello: this.hello }
   }
-  this.general = getEndpoint( 'na', 0, name );
-  this.champs  = function( id ) { return getEndpoint( 'na', 1, id ) }
-  this.league  = function( id ) { return getEndpoint( 'na', 2, id ) }
-  this.hello   = 'hello there';
-  return { general: this.general, champs: this.champs, league: this.league, hello: this.hello }
 }
 
 // get different info and use callback for when all info is collected
@@ -170,10 +183,9 @@ var gatherSummonerData = function(options, callback) {
 }
 
 summoners.appendHTML = function(data) {
-  console.log('appending html!', data);
   var rankedStats = data.rankedStats;
   var rankedCh = data.rankedChamps;
-  // after all done, append html string to sumlistarea
+  // after all done, append html string to self.sumlistarea
   var html = '';
 
   // meta
@@ -201,7 +213,6 @@ summoners.appendHTML = function(data) {
   html+='</div>'; // close .meta
 
   // ranked-champs
-
   html+='<div class="ranked-champs well">';
   html+= '<div class="heading row">';
   html+=  '<div class="col-md-12">';
@@ -255,9 +266,9 @@ summoners.appendHTML = function(data) {
   html+='</div>'
 
 
-  sumListArea.append(html);
+  self.sumListArea.append(html);
   $('.extra-data').hide();
-  $('#summoners-page .fluid-container').append(sumListArea);
+  $('#summoners-page .fluid-container').append(self.sumListArea);
   this.searchRankedChamp();
 
 }

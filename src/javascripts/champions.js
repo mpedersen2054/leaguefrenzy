@@ -104,10 +104,10 @@ var champs = champs || {
 
     // only show the 1-10, hide the 11-20
     // show the ( v more ) hide the ( ^ less )
-    showLessBad.hide();
-    showLessGood.hide();
     tenBadii.hide();
     tenGoodii.hide();
+    showLessBad.hide();
+    showLessGood.hide();
 
     // functions defined below
     // binds rollout when only 10
