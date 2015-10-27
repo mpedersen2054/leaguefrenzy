@@ -39,7 +39,6 @@ streamers.init = function(path) {
 }
 
 streamers.appendTop15 = function() {
-  console.log('hello streamers top')
   var fift = streamers.topStreamers.slice(0, 15);
   var html = '';
 

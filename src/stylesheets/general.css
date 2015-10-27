@@ -37,5 +37,12 @@ a.btn.btn-xs.add-counter { color: #000; }
 #footer .fluid-container > div {
   float: right;
   margin-top: 1em;
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+#footer .fluid-container > div h5 {
+  font-size: 1.6em;
+  color: #eee;
 }
 
