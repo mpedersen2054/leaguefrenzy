@@ -4,18 +4,16 @@
 
 ul#socialbar {
   position: fixed;
-  left: -42px;
-  top: 350px;
+  left: -50px;
+  top: 200px;
 }
 
 ul#socialbar li {
   position: relative;
-  left: -110px;
+  left: -90px;
   list-style: none;
   width: 150px;
-  height: 40px;
-  background-color: red;
-  border: 1px solid blue;
+  height: 55px;
 
   transition: opacity .3s, left .4s, right .4s, top .4s, bottom .4s, width .4s;
   -moz-transition: opacity .3s, left .4s, right .4s, top .4s, bottom .4s;
@@ -25,16 +23,44 @@ ul#socialbar li {
 ul#socialbar li:hover {
   position: relative;
   left: 0;
+  opacity: 1.0;
+}
+
+ul#socialbar li.fb {
+  background-color: #3D5E96;
+}
+ul#socialbar li.tw {
+  background-color: #4099FF;
+}
+ul#socialbar li.rd {
+  background-color: #ff5700;
+}
+ul#socialbar li.gp {
+  background-color: red;
+}
+
+ul#socialbar li:hover a span {
+  padding-left: 20px;
+}
+
+ul#socialbar li a,
+ul#socialbar li a:hover {
+  text-decoration: none;
+  padding-left: 5px;
+  color: #fff;
 }
 
 ul#socialbar li a span {
   position: relative;
-  top: 8px;
+  top: 16px;
+  font-size: 0.9em;
+  font-weight: 300;
 }
 
 ul#socialbar li a i {
   float: right;
   position: relative;
-  top: 10px;
-  right: 5px;
+  top: 18px;
+  right: 12px;
+  font-size: 1.2em;
 }
