@@ -24,7 +24,7 @@
     "mongoose": "^4.0.3",
     "morgan": "~1.5.1",
     "request": "^2.55.0",
-    "serve-favicon": "~2.2.0",
+    "serve-favicon": "^2.2.1",
     "underscore": "^1.8.3"
   }
 }
