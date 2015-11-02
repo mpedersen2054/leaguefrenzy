@@ -48,7 +48,7 @@ streamers.appendTop15 = function() {
     var channelUrl = streamer.channel.url.split('/').pop();
     var h = '';
 
-    h+='<a href="/streamers/'+channelUrl+'" class="stream" alt="'+streamer.channel.name+'">';
+    h+='<a href="/streamers/'+channelUrl+'" class="stream" alt="'+streamer.channel.status+'">';
     h+='<div class="stream-block clearfix">';
     h+='<div class="title">'+streamer.channel.status+'</div>';
     h+='<div class="views">'+streamer.viewers+'</div>';
