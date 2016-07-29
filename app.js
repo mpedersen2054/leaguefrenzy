@@ -28,9 +28,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ type: 'application/json' }));
 
-app.use(function(req, res, next) {
-  next();
-});
+// app.use(function(req, res, next) {
+//   next();
+// });
 
 var routes = require('./routes/router');
 app.use('/', routes);
