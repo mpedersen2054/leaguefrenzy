@@ -1,12 +1,12 @@
-var express    = require('express');
-var path       = require('path');
-var favicon    = require('serve-favicon');
-var logger     = require('morgan');
-var bodyParser = require('body-parser');
-var request    = require('request');
-var hbs        = require('hbs');
-var hello      = require('./lib/hello');
-var mongoose   = require('mongoose');
+var express         = require('express');
+var path            = require('path');
+var favicon         = require('serve-favicon');
+var logger          = require('morgan');
+var bodyParser      = require('body-parser');
+var request         = require('request');
+var hbs             = require('hbs');
+var scrapeChampInfo = require('./lib/scrapeChampInfo');
+var mongoose        = require('mongoose');
 
 var dburl = process.env.MONGOLAB_URI || 'mongodb://localhost/leaguefrenzy';
 mongoose.connect(dburl);
@@ -14,7 +14,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() { console.log('~~ connected to mongodb ~~') });
 
-hello();
+scrapeChampInfo();
 
 var app = express();
 
