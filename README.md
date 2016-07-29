@@ -1,6 +1,6 @@
 # leaguefrenzy
 
-Site built for all things League of Legends!
+All things League of Legends!
 
 site built to show you Champions a Champion is either strong against, or weak against & to look up ranked information on a Summoner. I built a little webscraping script to scrape the data on <a href="http://www.championselect.net/champions">http://www.championselect.net/champions</a> (<a href="https://github.com/mpedersen2054/leaguefrenzy/blob/master/lib/scrapeChampInfo.js">scraper</a>) using the Request & Cheerio(backend jQuery) packages. ( grey area? ).
 
