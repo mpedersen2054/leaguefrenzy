@@ -6,11 +6,12 @@ var tblResp = $('#streamers-page .table-responsive');
 
 var getStreamers = function(options, callback) {
   var limit = options.limit || 100;
-  var url = 'https://api.twitch.tv/kraken/search/streams\?q\=League+Of+Legends\&limit\='+limit;
+  // var url = 'https://api.twitch.tv/kraken/search/streams\?q\=League+Of+Legends\&limit\='+limit;
 
-  $.ajax({ url: url, type: 'GET' })
-    .success(function(data) { callback(null, data); })
-    .fail(function(x, s, e) { callback(e, null); })
+  // $.ajax({ url: url, type: 'GET' })
+  //   .success(function(data) { callback(null, data); })
+  //   .fail(function(x, s, e) { callback(e, null); })
+  //
 }
 
 
@@ -18,9 +19,12 @@ streamers.init = function(path) {
 
   // add spinner where streamers will go
   var spinner = $('<i></i>');
-  spinner
-    .addClass('fa fa-circle-o-notch fa-spin spinner')
-    .css({ 'font-size': '2em', 'position': 'relative', 'left': '43%', 'color': '#777', 'margin-top': '2em' });
+  // TWITCH CHANGED THEIR SITE SO NO MORE STREAMS
+  // spinner
+  //   .addClass('fa fa-circle-o-notch fa-spin spinner')
+  //   .css({ 'font-size': '2em', 'position': 'relative', 'left': '43%', 'color': '#777', 'margin-top': '2em' });
+
+  spinner.prepend('<div class="alert alert-warning" role="alert">This feature is current down, twitch.tv changed their api.</div>')
 
   // add spinner to either header of Twenty, or after .table-responsive of All Streamers
   strHeader.after(spinner);
